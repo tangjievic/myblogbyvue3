@@ -3,21 +3,43 @@
 
 <head>
     <%= require('html-loader!./element/meta.html') %>
-        <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-        <title>
-            <%= htmlWebpackPlugin.options.title %>
-        </title>
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
 </head>
 
-<body>
+<body class="wetui-theme">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <script href="<%= BASE_URL %>/libs/jquery-3.5.1.min"></script>
-    <header>我是头部</header>
-    <div id="app">
-        <header>我是头部</header>
+    <!-- 游览器兼容性覆盖[[ -->
+
+    <!-- 游览器兼容性覆盖]] -->
+    <!-- 主视图[[ -->
+    <div class="tjblog-page">
+        <header class="wet-nav">
+            <%= require('html-loader!./element/header.html') %>
+        </header>
+        <div class="page-left">
+            <!-- <div id="globelrender"></div> -->
+        </div>
+        <div class="page-right">
+            <section class="page-hd box-boder">
+                <div class="tjblog-hd_bg"></div>
+            </section>
+            <section class="page_section box-boder">
+                <h3 class="section_hd">博客简介</h3>
+                <p>
+                    Vue3.x出来了，本博客迈入了第7个大版本，之前为了考虑SEO，整个博客使用的技术比较杂乱，普通网页和单页面应用混杂，维护性较差，本次版本，统一采用vue3框架，构建多页面应用。因为穷，买不起服务器，采用的虚拟主机，没法做服务器渲染，所以借助vue/cli4.x对静态文件的处理，构建文件，优化了SEO问题;当然优化的不仅仅是前端，还有看不见的后端！
+                </p>
+            </section>
+        </div>
     </div>
+    <!-- 主视图]] -->
+    <script href="<%= BASE_URL %>/libs/jquery-3.5.1.min"></script>
+    <div id="globelrender"></div>
+    <!-- <div id="app"></div> -->
 </body>
 
 </html>

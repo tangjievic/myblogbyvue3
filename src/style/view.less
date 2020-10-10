@@ -1,0 +1,58 @@
+body{
+    font-family: var(--wet-base-ft);
+    font-size: var(--wet-base-fs);
+    font-weight: var(--wet-base-wt);
+}
+.tjblog-page{
+    display: flex;
+    width: 1200px;
+    margin:0 auto;
+    padding-top: 90px;
+    color: var(--wet-inverse);
+    letter-spacing: 1px;
+    line-height: 1.35em;
+    text-align: justify;
+    .box-boder{
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow:0 5px 38px -6px rgba(0, 0, 0, 0.14);
+    }
+    &::before{
+        content: '';
+        display: block;
+        flex:0 0 auto;
+        width: 70px;
+        height: 10vh;
+    }
+    &::after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .page-right,.page-left{
+        float: right;
+        height: 100%;
+    }
+    .page-right{
+        width: 790px;
+    }
+    .page-left{
+        width: 320px;
+    }
+    .page_section{
+        margin-top: 20px;
+        padding: 20px;
+        .section_hd{
+            position: relative;
+            padding-left: 55px;
+            &::before{
+                content: '';
+                position: absolute;
+                top: 50%;left: 0;
+                height: 2px;
+                width: 50px;
+                background-color: var(--wet-primary);
+            }
+        }
+    }
+}
