@@ -1,0 +1,28 @@
+.ellipsis(){
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+}
+.hotart_list{
+    padding:0;
+    margin: 0;
+    .list__item{
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 1px dashed rgba(226, 226, 226, 0.89);
+        transition: color 0.2s ease-in-out;
+        .item__link{
+            flex: 7;
+            width: 70%;
+            text-decoration: none;
+            color: #34495E;
+            .ellipsis();
+        }
+    }
+    .list__item:hover,.list__item:hover a{
+        cursor: pointer;
+        color: var(--wet-info);
+    }
+}

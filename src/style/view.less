@@ -38,20 +38,91 @@ body{
     }
     .page-left{
         width: 320px;
+        .page_section{
+            box-sizing: border-box;
+            width: 300px;
+            &:first-child{
+                margin-top: 0;
+            }
+        }
+    }
+    .page-hd{
+        position: relative;
+        .hd_desc{
+            position: absolute;
+            left: 0;top: 70px;
+            width: 100%;
+            text-align: center;
+            color: #000000;
+            h2{
+                font-size: 24px;
+            }
+        }
     }
     .page_section{
         margin-top: 20px;
         padding: 20px;
+        background-color: fade(#ffffff,85%);
+        position: relative;
         .section_hd{
             position: relative;
             padding-left: 55px;
+            margin-top: 0;
             &::before{
                 content: '';
                 position: absolute;
                 top: 50%;left: 0;
-                height: 2px;
                 width: 50px;
-                background-color: var(--wet-primary);
+                margin-top:-1px;
+                border-bottom: 2px solid var(--wet-primary);
+                //background-color: var(--wet-primary);
+            }
+        }
+        .secton_box{
+            display: flex;
+            .item-img{
+                flex:0 0 auto
+            }
+            .item{
+                flex:1;
+            }
+        }
+        .rt_dot{
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--wet-warn);
+            box-shadow: 0 0 2px 0 var(--wet-warn);
+            right: 30px;
+            bottom: 0;
+            border-radius: 50%;
+        }
+        .rt_bg{
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            height: 50px;
+            &::before,&::after{
+                content: '';
+                display: block;
+                border-radius: 50%;
+                position: absolute;
+            }
+            &::before{
+                width: 30px;
+                height: 30px;
+                border: 1px solid var(--wet-primary);
+                right: 0;
+                box-shadow: 0 0 2px 0 var(--wet-primary);
+                top: 50%;
+                margin-top: -15px;
+            }
+            &::after{
+                border: 1px solid var(--wet-success);
+                box-shadow: 0 0 2px 0 var(--wet-success);
+                width: 10px;
+                height: 10px;
+                top: 0;
+                right: 30px;
             }
         }
     }
