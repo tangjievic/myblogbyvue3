@@ -11,12 +11,17 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Menu</li>
-
+                <li class="menu-title">基础菜单</li>
                 <li>
                     <a href="index.html" class="waves-effect">
-                        <i class="ri-dashboard-line"></i><span class="badge badge-pill badge-success float-right">3</span>
-                        <span>Dashboard</span>
+                       <i class="dripicons-monitor"></i>
+                        <span>欢迎</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="waves-effect">
+                        <i class="dripicons-user"></i>
+                        <span>管理员类</span>
                     </a>
                 </li>
 
@@ -26,11 +31,11 @@
                         <span>Calendar</span>
                     </a>
                 </li>
-
+                 <li class="menu-title">用户菜单</li>
                 <li>
                     <a href="apps-chat.html" class=" waves-effect">
-                        <i class="ri-chat-1-line"></i>
-                        <span>Chat</span>
+                        <i class="ri-contacts-line"></i>
+                        <span>用户管理</span>
                     </a>
                 </li>
 
