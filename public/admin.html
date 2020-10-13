@@ -11,17 +11,18 @@
     </title>
 </head>
 
-<body>
+<body data-sidebar="dark">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="admin-apply"></div>
-    <script src="<%= BASE_URL %>jquery.min.js"></script>
-    <script src="<%= BASE_URL %>bootstrap.bundle.min.js"></script>
-    <script src="<%= BASE_URL %>metisMenu.min.js"></script>
-    <script src="<%= BASE_URL %>simplebar.min.js"></script>
-    <script src="<%= BASE_URL %>waves.min.js"></script>
+    <script src="<%= BASE_URL %>libs/jquery.min.js"></script>
+    <script src="<%= BASE_URL %>libs/bootstrap.bundle.min.js"></script>
+    <script src="<%= BASE_URL %>libs/metisMenu.min.js"></script>
+    <script src="<%= BASE_URL %>libs/simplebar.min.js"></script>
+    <script src="<%= BASE_URL %>libs/waves.min.js"></script>
     <!-- built files will be auto injected -->
+    <script src="<%= BASE_URL %>libs/business.js"></script>
 </body>
 
 </html>
