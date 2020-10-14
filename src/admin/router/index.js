@@ -1,17 +1,35 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Main from '../views/main/Main.vue';
-
-const routers = [{
+import WelCome from '../views/WelCome.vue';
+import AdminList from '../views/main/AdminList.vue'
+const routers = [
+    {
         path: '/',
         name: 'main',
-        component: Main
+        component: Main,
+        children:[
+            {
+                path:"welcome",
+                name:"welcome",
+                component:WelCome
+            },
+            {
+                path:"admin",
+                name:"admin",
+                component:AdminList
+            },
+            {
+                path: '/',
+                redirect: { path: 'welcome' }
+            },
+        ]
     },
     {
         path: '/login',
         name: 'login',
         component: () =>
             import ('../views/login/LoginPage.vue')
-    }
+    },
 ]
 
 const router = createRouter({

@@ -7,7 +7,9 @@
     <Header></Header>
     <LeftMenu></LeftMenu>
     <div class="main-content">
-        <slot></slot>
+        <div class="page-content">
+            <slot></slot>
+        </div>
     </div>
 </div>
 </template>
