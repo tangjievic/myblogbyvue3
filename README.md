@@ -12,22 +12,26 @@
 - admin 是管理端应用
 - mbpage 移动端应用
 
-## Project setup
+## vue3组件传值(写在setup中)
+- 1.父传子 父组件-provide-provide(<名>,值);
+- 2.子组件 inject-inject(<名>);
+
+## 项目初始化
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 项目启动
 ```
-npm run serve
+npm run start
 ```
 
-### Compiles and minifies for production
+### 项目打包
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### lint修复
 ```
 npm run lint
 ```

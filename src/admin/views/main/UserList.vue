@@ -9,6 +9,9 @@
 
 <script>
 export default {
-    components: {}
+    name:'UserList',
+    components: {
+
+    }
 }
 </script>

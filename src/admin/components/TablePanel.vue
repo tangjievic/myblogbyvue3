@@ -1,225 +1,190 @@
 <style lang="less">
-
 </style>
-
 <template>
-<ContainerFluid>
+  <ContainerFluid>
     <div class="card">
-        <div class="card-body">
-            <div class="dropdown float-right">
-                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                    <i class="mdi mdi-dots-vertical"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <div
+            id="DataTables_Table_0_wrapper"
+            class="dataTables_wrapper dt-bootstrap4 no-footer"
+          >
+            <div class="row">
+              <div class="col-sm-12">
+                <table
+                  class="table table-centered datatable dt-responsive nowrap no-footer dtr-inline"
+                  data-page-length="5"
+                  style="
+                    border-collapse: collapse;
+                    border-spacing: 0px;
+                    width: 100%;
+                  "
+                  id="DataTables_Table_0"
+                  role="grid"
+                  aria-describedby="DataTables_Table_0_info"
+                >
+                  <thead class="thead-light">
+                    <tr role="row">
+                      <th
+                        class="sorting_disabled"
+                        rowspan="1"
+                        colspan="1"
+                      >
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                          />
+                          <label class="custom-control-label"
+                            >&nbsp;</label
+                          >
+                        </div>
+                      </th>
+                      <th
+                        class="sorting_disabled"
+                        rowspan="1"
+                        colspan="1"
+                        v-for="(item,index) in columns"
+                        :key="item.key?item.key:index"
+                      >
+                        {{item.title}}
+                      </th>
+                      <th
+                        style="width: 118px"
+                        class="sorting_disabled"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Action"
+                      >
+                        操作
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr role="row" class="odd" v-for="(item,index) in data" :key="item.key?item.key:index">
+                      <td class="dtr-control">
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                          />
+                          <label class="custom-control-label"
+                            >&nbsp;</label
+                          >
+                        </div>
+                      </td>
+
+                      <td class="sorting_1" v-for="(its,idx) in columns" :key="its.key?its.index:idx">
+                        <template v-if="!item.scopedSlots">{{item[its.dataIndex]}}</template>
+                        <slot v-else :name="item.scopedSlots.customRender"></slot>
+                      </td>
+                      <td>
+                        <a
+                          href="javascript:void(0);"
+                          class="mr-3 text-primary"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title=""
+                          data-original-title="Edit"
+                          ><i class="mdi mdi-pencil font-size-18"></i
+                        ></a>
+                        <a
+                          href="javascript:void(0);"
+                          class="text-danger"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title=""
+                          data-original-title="Delete"
+                          ><i class="mdi mdi-trash-can font-size-18"></i
+                        ></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-
-            <h4 class="card-title mb-4">Latest Transactions</h4>
-
-            <div class="table-responsive">
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                    </select> entries</label></div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-centered datatable dt-responsive nowrap dataTable no-footer dtr-inline" data-page-length="5" style="border-collapse: collapse; border-spacing: 0px; width: 100%;" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                                <thead class="thead-light">
-                                    <tr role="row">
-                                        <th style="width: 28px;" class="sorting_disabled" rowspan="1" colspan="1" aria-label="
-
-                                                                    &amp;nbsp;
-
-                                                            ">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ordercheck">
-                                                <label class="custom-control-label" for="ordercheck">&nbsp;</label>
-                                            </div>
-                                        </th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 57px;" aria-sort="ascending" aria-label="Order ID: activate to sort column descending">Order ID</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 69px;" aria-label="Date: activate to sort column ascending">Date</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 83px;" aria-label="Billing Name: activate to sort column ascending">Billing Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 32px;" aria-label="Total: activate to sort column ascending">Total</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 104px;" aria-label="Payment Status: activate to sort column ascending">Payment Status</th>
-                                        <th style="width: 87px;" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Action">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr role="row" class="odd">
-                                        <td class="dtr-control">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ordercheck10">
-                                                <label class="custom-control-label" for="ordercheck10">&nbsp;</label>
-                                            </div>
-                                        </td>
-
-                                        <td class="sorting_1"><a href="javascript: void(0);" class="text-dark font-weight-bold">#NZ1563</a> </td>
-                                        <td>
-                                            28 Mar, 2020
-                                        </td>
-                                        <td>Frank Dean</td>
-
-                                        <td>
-                                            $164
-                                        </td>
-                                        <td>
-                                            <div class="badge badge-soft-warning font-size-12">unpaid</div>
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="dtr-control">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ordercheck9">
-                                                <label class="custom-control-label" for="ordercheck9">&nbsp;</label>
-                                            </div>
-                                        </td>
-
-                                        <td class="sorting_1"><a href="javascript: void(0);" class="text-dark font-weight-bold">#NZ1564</a> </td>
-                                        <td>
-                                            28 Mar, 2020
-                                        </td>
-                                        <td>Eddy Torres</td>
-
-                                        <td>
-                                            $141
-                                        </td>
-                                        <td>
-                                            <div class="badge badge-soft-success font-size-12">Paid</div>
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="dtr-control">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ordercheck8">
-                                                <label class="custom-control-label" for="ordercheck8">&nbsp;</label>
-                                            </div>
-                                        </td>
-
-                                        <td class="sorting_1"><a href="javascript: void(0);" class="text-dark font-weight-bold">#NZ1565</a> </td>
-                                        <td>
-                                            29 Mar, 2020
-                                        </td>
-                                        <td>Jamison Clark</td>
-
-                                        <td>
-                                            $123
-                                        </td>
-                                        <td>
-                                            <div class="badge badge-soft-success font-size-12">Paid</div>
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="dtr-control">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ordercheck7">
-                                                <label class="custom-control-label" for="ordercheck7">&nbsp;</label>
-                                            </div>
-                                        </td>
-
-                                        <td class="sorting_1"><a href="javascript: void(0);" class="text-dark font-weight-bold">#NZ1566</a> </td>
-                                        <td>
-                                            30 Mar, 2020
-                                        </td>
-                                        <td>Jewel Buckley</td>
-
-                                        <td>
-                                            $112
-                                        </td>
-                                        <td>
-                                            <div class="badge badge-soft-success font-size-12">Paid</div>
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="dtr-control">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ordercheck6">
-                                                <label class="custom-control-label" for="ordercheck6">&nbsp;</label>
-                                            </div>
-                                        </td>
-
-                                        <td class="sorting_1"><a href="javascript: void(0);" class="text-dark font-weight-bold">#NZ1567</a> </td>
-                                        <td>
-                                            31 Mar, 2020
-                                        </td>
-                                        <td>Jeffrey Waltz</td>
-
-                                        <td>
-                                            $105
-                                        </td>
-                                        <td>
-                                            <div class="badge badge-soft-warning font-size-12">unpaid</div>
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 5 of 10 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                <ul class="pagination pagination-rounded">
-                                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item next" id="DataTables_Table_0_next"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-5">
+              </div>
+              <div class="col-sm-12 col-md-7">
+                <div
+                  class="dataTables_paginate paging_simple_numbers"
+                  id="DataTables_Table_0_paginate"
+                >
+                  <ul class="pagination pagination-rounded">
+                    <li
+                      class="paginate_button page-item previous disabled"
+                      id="DataTables_Table_0_previous"
+                    >
+                      <a
+                        href="#"
+                        aria-controls="DataTables_Table_0"
+                        data-dt-idx="0"
+                        tabindex="0"
+                        class="page-link"
+                        ><i class="mdi mdi-chevron-left"></i
+                      ></a>
+                    </li>
+                    <li class="paginate_button page-item active">
+                      <a
+                        href="#"
+                        aria-controls="DataTables_Table_0"
+                        data-dt-idx="1"
+                        tabindex="0"
+                        class="page-link"
+                        >1</a
+                      >
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a
+                        href="#"
+                        aria-controls="DataTables_Table_0"
+                        data-dt-idx="2"
+                        tabindex="0"
+                        class="page-link"
+                        >2</a
+                      >
+                    </li>
+                    <li
+                      class="paginate_button page-item next"
+                      id="DataTables_Table_0_next"
+                    >
+                      <a
+                        href="#"
+                        aria-controls="DataTables_Table_0"
+                        data-dt-idx="3"
+                        tabindex="0"
+                        class="page-link"
+                        ><i class="mdi mdi-chevron-right"></i
+                      ></a>
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</ContainerFluid>
+  </ContainerFluid>
 </template>
 
 <script>
-import ContainerFluid from '../layout/ContainerFluid';
+import ContainerFluid from "../layout/ContainerFluid";
+import { reactive,inject } from 'vue';
 export default {
-    components: {
-        ContainerFluid
-    }
-}
+  components: {
+    ContainerFluid,
+  },
+  setup() {
+      const state = reactive({
+          columns:inject('columns')?inject('columns'):[],
+          data:inject('data')?inject('data'):[]
+      })
+    return {
+        ...state
+    };
+  },
+};
 </script>
