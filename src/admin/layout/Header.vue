@@ -106,8 +106,12 @@
 </template>
 
 <script>
-import { ref,onMounted } from 'vue';
-function initMenuCollapse(dom){
+import {
+    ref,
+    onMounted
+} from 'vue';
+
+function initMenuCollapse(dom) {
     let $ = window.$;
     $(dom).on('click', function (event) {
         event.preventDefault();
@@ -126,13 +130,12 @@ function initMenuCollapse(dom){
     });
 }
 export default {
-    setup(){
+    setup() {
         const menubtn = ref(null);
-        onMounted(()=>{
+        onMounted(() => {
             initMenuCollapse(menubtn.value);
         })
-
-        return{
+        return {
             menubtn
         }
     }

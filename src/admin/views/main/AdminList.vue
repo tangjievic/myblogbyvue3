@@ -4,24 +4,29 @@
 
 <template>
 <div>
-    <TablePanel>
-        <template v-slot:age="text" name="age">
-            <a href="#!">{{ text+'xxx' }}</a>
-        </template>
-    </TablePanel>
+    <ContainerFluid title="管理员列表" moudleText="基础菜单" routerText="管理员类">
+        <TablePanel>
+            <template v-slot:age="{item}">
+                <a href="#!">{{item.age}}</a>
+            </template>
+        </TablePanel>
+    </ContainerFluid>
 </div>
 </template>
 
 <script>
-import { provide } from 'vue'
+import {
+    provide
+} from 'vue'
 import TablePanel from '../../components/TablePanel';
+import ContainerFluid from '../../layout/ContainerFluid';
 export default {
     components: {
-        TablePanel
+        TablePanel,
+        ContainerFluid
     },
-    setup(){
-        provide('columns',[
-            {
+    setup() {
+        provide('columns', [{
                 title: 'Name',
                 dataIndex: 'name',
                 key: 'name',
@@ -30,7 +35,9 @@ export default {
                 title: 'Age',
                 dataIndex: 'age',
                 key: 'age',
-                scopedSlots: { customRender: 'age' },
+                scopedSlots: {
+                    customRender: 'age'
+                },
             },
             {
                 title: 'Address',
@@ -38,8 +45,7 @@ export default {
                 key: 'address',
             },
         ]);
-        provide('data',[
-            {
+        provide('data', [{
                 key: '1',
                 name: 'John Brown',
                 age: 32,

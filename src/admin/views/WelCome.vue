@@ -26,7 +26,7 @@
             <div class="text-center mb-5">
                 <h4>WetCms</h4>
                 <p class="text-muted mb-4">
-                    基于bootstrap4,jq3.5,vue3打造的管理系统
+                    基于bootstrap4,vue3等打造的管理系统
                 </p>
 
                 <ul class="nav nav-pills pricing-nav-tabs">
