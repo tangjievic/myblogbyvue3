@@ -79,7 +79,6 @@ export default {
             columns: inject('columns') ? inject('columns') : [],
             data: inject('data') ? inject('data') : []
         })
-        //console.log(state.columns)
         return {
             ...state
         };

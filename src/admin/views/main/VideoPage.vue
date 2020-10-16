@@ -1,26 +1,53 @@
-<style lang="less">
-
+<style lang="less" scoped>
+.button-items {
+    padding-bottom: 20px;
+}
 </style>
 
 <template>
-<ContainerFluid title="管理员列表" moudleText="基础菜单" routerText="管理员类">
-    <TablePanel>
-        <template v-slot:age="{item}">
-            <a href="#!">{{item.age}}</a>
+<ContainerFluid title="视频管理" moudleText="基础菜单" routerText="视频管理">
+    <Tabs>
+        <template v-slot:videolist>
+            <div>
+                <div class="button-items">
+                    <button type="button" class="btn btn-success waves-effect waves-light">添加视频分类</button>
+                </div>
+                <TablePanel></TablePanel>
+            </div>
         </template>
-    </TablePanel>
+        <template v-slot:videotype>
+            <div>
+                <TablePanel></TablePanel>
+            </div>
+        </template>
+    </Tabs>
 </ContainerFluid>
 </template>
 
 <script>
 import {
     provide
-} from 'vue'
-import TablePanel from '../../components/TablePanel';
+} from 'vue';
 import ContainerFluid from '../../layout/ContainerFluid';
+import Tabs from '../../components/Tabs';
+import TablePanel from '../../components/TablePanel';
 export default {
-    components: {},
+    components: {
+        ContainerFluid,
+        Tabs,
+        TablePanel
+    },
+
     setup() {
+        provide('tabsPage', [{
+                name: '视频列表',
+                key: "videolist"
+            },
+            {
+                name: '视频分类',
+                key: 'videotype'
+            }
+        ])
         provide('columns', [{
                 title: 'Name',
                 dataIndex: 'name',
@@ -63,5 +90,6 @@ export default {
             }
         ])
     }
+
 }
 </script>

@@ -22,10 +22,11 @@ export default {}
 .tjblog-hd_bg {
     width: 790px;
     height: 300px;
-    background-color: fade(#666ee8, 80%);
+    background-color: fade(#1abc9c, 90%);
     position: relative;
     z-index: -1;
     overflow: hidden;
+
     .box {
         position: absolute;
     }
@@ -41,14 +42,16 @@ export default {}
         border-bottom-color: transparent;
         transform: rotate(-45deg);
     }
-    .box_1{
+
+    .box_1 {
         bottom: 80px;
         height: 100px;
         width: 45px;
         display: flex;
         flex-wrap: wrap;
-        .boxspan{
-            width:5px;
+
+        .boxspan {
+            width: 5px;
             height: 5px;
             margin: 5px;
             border-radius: 50%;
@@ -56,7 +59,8 @@ export default {}
             background-color: fade(#ffffff, 80%);
         }
     }
-    .box_3{
+
+    .box_3 {
         height: 200px;
         border-radius: 50%;
         width: 150px;
@@ -68,7 +72,8 @@ export default {}
         bottom: -50px;
         left: -130px;
     }
-    .box_4{
+
+    .box_4 {
         height: 200px;
         border-radius: 50%;
         width: 150px;
@@ -77,7 +82,8 @@ export default {}
         right: -85px;
         top: -85px;
     }
-    .box_5{
+
+    .box_5 {
         height: 200px;
         border-radius: 50%;
         width: 150px;
@@ -86,46 +92,52 @@ export default {}
         right: -125px;
         bottom: -125px;
     }
-    .box_6{
+
+    .box_6 {
         background-color: fade(#ffffff, 80%);
         height: 20px;
         width: 20px;
         border-radius: 5px;
         left: 200px;
-        top:35px
+        top: 35px
     }
-    .box_7{
+
+    .box_7 {
         background-color: fade(#ffffff, 80%);
         height: 10px;
         width: 10px;
         border-radius: 3px;
         left: 180px;
-        top:55px
+        top: 55px
     }
-    .box_8{
+
+    .box_8 {
         background-color: fade(#ffffff, 80%);
         height: 20px;
         width: 20px;
         border-radius: 3px;
         left: 230px;
-        bottom:40px;
+        bottom: 40px;
     }
-    .box_9{
+
+    .box_9 {
         background-color: fade(#ffffff, 80%);
         height: 8px;
         width: 8px;
         border-radius: 3px;
         left: 200px;
-        bottom:55px;
+        bottom: 55px;
     }
-    .box_10{
+
+    .box_10 {
         right: 0;
         top: 0;
         width: 180px;
         display: flex;
         flex-wrap: wrap;
-        .boxspan{
-            width:5px;
+
+        .boxspan {
+            width: 5px;
             height: 5px;
             margin: 6px;
             border-radius: 50%;
@@ -133,10 +145,12 @@ export default {}
             background-color: fade(#ffffff, 30%);
         }
     }
-    .box_11{
+
+    .box_11 {
         top: 100px;
         right: 200px;
-        &::before{
+
+        &::before {
             content: '';
             display: block;
             width: 20px;
@@ -144,10 +158,11 @@ export default {}
             border-radius: 3px;
             background-color: fade(#ffffff, 80%);
         }
-        &::after{
+
+        &::after {
             content: '';
             position: absolute;
-            top:-10px;
+            top: -10px;
             right: -10px;
             display: block;
             width: 8px;
@@ -156,15 +171,17 @@ export default {}
             background-color: fade(#ffffff, 80%);
         }
     }
-    .box_12{
+
+    .box_12 {
         left: 50%;
-        top:0;
+        top: 0;
         display: flex;
         flex-wrap: wrap;
         width: 130px;
         margin-left: -65px;
-        .boxspan{
-            width:5px;
+
+        .boxspan {
+            width: 5px;
             height: 5px;
             margin: 6px;
             border-radius: 50%;

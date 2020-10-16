@@ -3,6 +3,10 @@ import Main from '../views/main/Main.vue';
 import WelCome from '../views/WelCome.vue';
 import AdminList from '../views/main/AdminList.vue';
 import ArtWritte from '../views/main/artpage/ArtWritte.vue';
+import UserList from '../views/main/UserList';
+import ArtCate from '../views/main/artpage/ArtCate.vue';
+import SysSeting from '../views/main/SysSeting.vue';
+import VideoPage from '../views/main/VideoPage.vue';
 const routers = [{
         path: '/',
         name: 'main',
@@ -21,6 +25,26 @@ const routers = [{
                 path: 'artwritte',
                 name: 'artwritte',
                 component: ArtWritte,
+            },
+            {
+                path:"artcate",
+                name:'artcate',
+                component:ArtCate
+            },
+            {
+                path:'userlist',
+                name:'userliset',
+                component:UserList
+            },
+            {
+                path:"system",
+                name:'system',
+                component:SysSeting
+            },
+            {
+                path:'videopage',
+                name:'videopage',
+                component:VideoPage
             },
             {
                 path: '/',

@@ -1,0 +1,121 @@
+
+@success:#64d572;
+@primary:#1abc9c;
+@warn:#F39C12;
+@risk:#FA4E4E;
+@info:#3498DB;
+@inverse:#34495E;
+
+@height_lg:40px;
+@height_nm:38px;//normal
+@height_md:32px;
+@height_sm:26px;
+@height_mini:22px;
+
+@pad_lg:0 18px;
+@pad_nm:0 16px;
+@pad_md:0 14px;
+@pad_sm:0 12px;
+@pad_mini:0 10px;
+
+@ftf-sans-serif:var(--wet-base-ft);
+@fs-base:16px;
+//基本样式函数
+.wet-btn-size(@height,@padding){
+    min-height: @height;
+    height: @height;
+    line-height: @height;
+    padding: @padding;
+}
+.wet-btn-bg_color(@color){
+    color: #fff;
+    background-color: @color;
+}
+.wet-btn-bg_color__plain(@color){
+    background-color: #ffffff;
+    color: @color;
+}
+.wet-btn { //正常形态
+    font-family: @ftf-sans-serif;
+    font-size: @fs-base;
+    text-align: center;
+    display: inline-block;//默认按钮是内联的
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition:all 0.1s ease-in-out;
+    font-weight: @fw-base;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    border-radius: 4px;//默认是有圆角设计
+    text-decoration: none;
+    .wet-btn-bg_color__plain(@inverse);//默认plain类型
+    .wet-btn-size(@height_nm,@pad_nm);//默认大小
+    .border_1px(fade(@inverse,30%));
+    &:hover{
+        .border_1px(fade(@primary,30%));
+        .wet-btn-bg_color__plain(@primary);
+    }
+    &:active{
+        .border_1px(@primary);
+    }
+    &__block{
+        display: block;
+    }
+    &__large{
+        .wet-btn-size(@height_lg,@pad_lg);
+    }
+    &__middle{
+        .wet-btn-size(@height_md,@pad_md);
+    }
+    &__small{
+        .wet-btn-size(@height_sm,@pad_sm);
+    }
+    &__mini{
+        .wet-btn-size(@height_mini,@pad_mini);
+    }
+    &__success{
+        .wet-btn-bg_color(@success);
+        .border_1px(fade(@success,30%));
+        &:hover{
+            .wet-btn-bg_color(fade(@success,70%));
+        }
+        &:active{
+            .wet-btn-bg_color(@success);
+        }
+    }
+    &__primary{
+        .wet-btn-bg_color(@primary);
+        .border_1px(fade(@primary,30%));
+        &:hover{
+            .wet-btn-bg_color(fade(@primary,70%));
+        }
+        &:active{
+            .wet-btn-bg_color(@primary);
+        }
+    }
+    &__warn{
+        .wet-btn-bg_color(@warn);
+        .border_1px(fade(@warn,30%));
+        &:hover{
+            .wet-btn-bg_color(fade(@warn,70%));
+        }
+        &:active{
+            .wet-btn-bg_color(@warn);
+        }
+    }
+    &__info{
+        .wet-btn-bg_color(@info);
+        .border_1px(fade(@info,30%));
+        &:hover{
+            .wet-btn-bg_color(fade(@info,70%));
+        }
+        &:active{
+            .wet-btn-bg_color(@info);
+        }
+    }
+}

@@ -47,13 +47,7 @@
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="ri-store-2-line"></i>
-                        <span>文章分类</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <i class="ri-artboard-2-line"></i>
-                        <span>文章标记</span>
+                        <span>分类&标签</span>
                     </a>
                 </li>
                 <li>

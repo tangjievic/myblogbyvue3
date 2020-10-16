@@ -6,6 +6,7 @@
     bottom: 0;
     top: 0;
     z-index: -1;
+    color: rgb(131, 201, 187);
 }
 </style>
 
@@ -172,7 +173,7 @@ export default {
                 circle: { //小球属性
                     amount: 24,
                     layer: 3,
-                    color: [146, 152, 236],
+                    color: [131, 201, 187],
                     alpha: 0.2
                 },
                 speed: 0.5,

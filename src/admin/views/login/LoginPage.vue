@@ -22,19 +22,19 @@
 
                                         <div class="p-2 mt-5">
                                             <form class="form-horizontal" action="index.html">
-                
+
                                                 <div class="form-group auth-form-group-custom mb-4">
                                                     <i class="ri-user-2-line auti-custom-input-icon"></i>
                                                     <label for="username">用户名</label>
                                                     <input type="text" class="form-control" id="username" placeholder="输入管理员名">
                                                 </div>
-                        
+
                                                 <div class="form-group auth-form-group-custom mb-4">
                                                     <i class="ri-lock-2-line auti-custom-input-icon"></i>
                                                     <label for="userpassword">密码</label>
                                                     <input type="password" class="form-control" id="userpassword" placeholder="输入密码">
                                                 </div>
-                                                 <div class="form-group auth-form-group-custom mb-4">
+                                                <div class="form-group auth-form-group-custom mb-4">
                                                     <i class="ri-lock-2-line auti-custom-input-icon"></i>
                                                     <label for="userpassword">二次密码验证</label>
                                                     <input type="password" class="form-control" id="userpassword" placeholder="输入密码">
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="authentication-bg">
-                        
+
                     </div>
                 </div>
             </div>
@@ -78,8 +78,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.authentication-bg{
-    background-image: url(../../assets/images/login.jpg);
+.authentication-bg {
+    background-image: url(../../assets/images/login.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 35% auto;
