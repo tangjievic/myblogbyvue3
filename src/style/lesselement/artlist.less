@@ -4,6 +4,26 @@
     margin: 0;
     padding:0 15px;
 }
+.art_msg{
+    i{
+        font-size: 18px;
+        position: relative;
+        bottom: -3px;
+        margin-right: 3px;
+    }
+    span{
+        margin-right: 8px;
+    }
+    .ri-edit-circle-fill{
+        color:var(--wet-info) ;
+    }
+    .ri-chat-history-fill{
+        color:var(--wet-warn);
+    }
+    .ri-send-plane-fill{
+        color:var(--wet-purple);
+    }
+}
 .main__articel .art_title{
     padding: 20px;
     font-size: 15px;
@@ -52,11 +72,27 @@
     }
     .btn_wrapper{
         display: flex;
+        align-items: center;
         .art_base{
             flex: 6;
+            i{
+                font-size: 18px;
+                position: relative;
+                bottom: -3px;
+            }
+            .ri-edit-circle-fill{
+                color:var(--wet-info) ;
+            }
+            .ri-chat-history-fill{
+                color:var(--wet-warn);
+            }
+            .ri-fire-fill{
+                color:var(--wet-risk);
+            }
         }
         .btn_div{
-            flex: 2;
+            flex: 1;
+            margin-left:10px;
             text-align: right;
         }
     }

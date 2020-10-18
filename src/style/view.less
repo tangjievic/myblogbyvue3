@@ -68,6 +68,22 @@ body{
             position: relative;
             padding-left: 55px;
             margin-top: 0;
+            &.new_hd{
+                &::after{
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: -10px;
+                    right:-10px;
+                    display: block;
+                    width: 36px;
+                    height: 36px;
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                    background-size: cover;
+                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAaVBMVEUAAAD/ej7/ej3/eT7/eD3/eT3/eT3/eT3/eT3/ej3/eT3/eDz/eT7/eT3/eT3/ejz/eT3/eTr/ej3/ej3/ej3/eT3/eT3/ej3/ej3/eDz/ej7/ez3/ejv/ejD/ej3/eT7/ej3/eTz/ej4bMlMCAAAAInRSTlMAgOv7Lu/byLduWEK9r3pMNCHm4sOhnJN0VTsnGgrRsYqHhHXhxQAAALNJREFUOMuFz1cSwyAMBNA1JYB7707h/odMvmAsZiL96s1Ki8z/H3ACidAEUJE38g6IyIv6fCQAWdxLv64URPH45YvO3AHJGLqp3FwfARXtPMJZJQKgQvvmvT+djSDJKErRdn0uAqDCnnU1l4dMQOzyGX3xEk5EkHQx7aKuIYBUbMe0ZL7SAVAhpFaVUiaANKO+dktOkE8NaUFEGHACnAAnwAlwApwAJ8AJcAKcACfACXDiC5d3OnB8OHynAAAAAElFTkSuQmCC);
+                }
+            }
             &::before{
                 content: '';
                 position: absolute;

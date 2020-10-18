@@ -2,7 +2,6 @@
 .listroll {
     /*消息滚动*/
     width: 100%;
-
     .ellipsis {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -147,7 +146,6 @@ export default {
         onMounted(() => {
             let $ul = $(listroll.value);
             listRoll($ul);
-            console.log('xxx')
         })
 
         return {

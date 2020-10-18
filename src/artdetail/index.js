@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-createApp(App).mount('#app')
+import ArtAnchor from './ArtAnchor.vue';
+import '../wetui/index.less';
+import '../style/index.less';
+createApp(App).mount('#app');
+createApp(ArtAnchor).mount('#artanchor')

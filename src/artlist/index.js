@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-createApp(App).mount('#app')
+import '../wetui/index.less';
+import '../style/index.less';
+createApp(App).mount('#app');
