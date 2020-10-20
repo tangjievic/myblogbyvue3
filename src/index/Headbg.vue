@@ -22,7 +22,7 @@ export default {}
 .tjblog-hd_bg {
     width: 790px;
     height: 300px;
-    background-color: fade(#1abc9c, 90%);
+    background-color: fade(#2bb9ad, 90%);
     position: relative;
     z-index: -1;
     overflow: hidden;

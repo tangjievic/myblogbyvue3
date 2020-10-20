@@ -9,7 +9,7 @@
 
     .header-title {
         font-size: 22px;
-        color: #1abc9c;
+        color: var(--wet-primary);
     }
 
     .nav-actived {
@@ -20,7 +20,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            border-top: 4px solid #1abc9c;
+            border-top: 4px solid var(--wet-primary);
         }
     }
 }

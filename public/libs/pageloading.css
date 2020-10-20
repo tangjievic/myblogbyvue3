@@ -7,7 +7,7 @@
     width: 100%;
     overflow: hidden;
     z-index: 999;
-    background: #95d8ca;
+    background: #ffffff;
     --amount: 20;
     transition: all 0.5s ease-in;
     opacity: 1;

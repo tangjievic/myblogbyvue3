@@ -29,7 +29,7 @@
         }
 
         &:hover {
-            background-color: fade(#1abc9c, 10%);
+            background-color: fade(#2bb9ad, 10%);
         }
 
         &::after {
@@ -59,11 +59,11 @@
     }
 
     .tag-1 {
-        background-color: #1abc9c;
+        background-color: var(--wet-primary);
     }
 
     .tag-2 {
-        background-color: rgb(255, 29, 91);
+        background-color: var(--wet-risk);
     }
 
     .tag-3 {

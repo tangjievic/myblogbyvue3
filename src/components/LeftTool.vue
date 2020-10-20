@@ -1,5 +1,5 @@
 <style lang="less" scoped>
-@wet-primary: #1abc9c;
+@wet-primary: #2bb9ad;
 @wet-leftmenu-mini-width: 70px;
 @wet-white: #ffffff;
 @wet-inverse: #34495E;
