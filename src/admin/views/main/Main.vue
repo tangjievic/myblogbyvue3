@@ -26,7 +26,7 @@ export default {
         onMounted(() => {
             setTimeout(() => {
                 state.isLoading = false;
-            }, 3000)
+            }, 1000)
         })
         return toRefs(state);
     }

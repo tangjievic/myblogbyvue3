@@ -5,8 +5,23 @@
 </template>
 
 <script>
+import {
+    useRouter
+} from 'vue-router';
 export default {
     name: 'Admin',
+    setup() {
+        const router = useRouter();
+        router.beforeEach((to, from, next) => {
+            // ...
+            if (to.matched.length === 0) {
+                next('/404')
+            } else {
+                next()
+            }
+            //console.log(to, from, next, '路由守卫')
+        })
+    }
 }
 </script>
 

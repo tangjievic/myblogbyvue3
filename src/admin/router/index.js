@@ -14,7 +14,7 @@ const routers = [{
         children: [{
                 path: "welcome",
                 name: "welcome",
-                component: WelCome
+                component: WelCome,
             },
             {
                 path: "admin",
@@ -58,6 +58,11 @@ const routers = [{
         component: () =>
             import ('../views/login/LoginPage.vue')
     },
+    {
+        path:'/404',
+        name:'404',
+        component:() => import('../views/404.vue')
+    }
 ]
 
 const router = createRouter({
