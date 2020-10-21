@@ -4,6 +4,7 @@
 <template>
 <MainLayout>
     <router-view></router-view>
+    <Footer></Footer>
 </MainLayout>
 </template>
 

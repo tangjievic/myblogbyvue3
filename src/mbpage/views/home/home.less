@@ -2,6 +2,11 @@
     min-height: 100vh;
     background-color: rgba(0,0,0,0.05);
     font-family: -apple-system, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    &::after{
+        content: '';
+        display: block;
+        height: 100px;
+    }
     .slider {
         padding: 15px 0;
         height: 200px !important;
@@ -61,19 +66,11 @@
         }
     }
     .quote{
-        margin: 15px;
-    }
-    .blog-list{
-        margin: 15px 15px 0px 15px;
         position: relative;
-        padding-bottom: 150px;
-        .list_hd{
-            
-        }
-        .blog-detailt{
-            padding: 10px;
-            background-color: #ffffff;
-            margin: 0;
+        margin: 15px;
+        .title{
+            font-size: 15px;
+            padding-top: 30px;
         }
     }
 }

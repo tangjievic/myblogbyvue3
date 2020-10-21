@@ -68,22 +68,42 @@
     </div>
 
     <div class="section quote">
+        <div class="slider-tag warn">最新更新</div>
         <div class="container">
-            <h4>文章标题</h4>
+            <h4 class="title">文章标题</h4>
             <p>文章简介</p>
             <button class="button-default">阅读详情</button>
         </div>
     </div>
-
-    <ul class="blog-list">
-        <li class="list_hd">文章列表</li>
-        <li class="blog-detailt">
-            <h5><a href="">How To Design Fresh and Clean</a></h5>
-            <div class="date"><span><i class="fa fa-calendar"></i>July 22, 2016</span></div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quasi sit aperiam quia voluptatem odio, facere iusto magni sunt, cumque quae, molestias temporibus ducimus repellendus!</p>
-            <div class="button-default">阅读详情</div>
-        </li>
-    </ul>
+    <div class="blog-list">
+        <div class="list_hd slider-tag warn">文章列表</div>
+        <ul class="list_ul">
+            <li class="blog-detailt border-1px" v-for="(item,index) in 10" :key="index">
+                <h5 class="art_title"><a href="">文章标题</a></h5>
+                <div class="art_tag">
+                    <span>
+                        <i class="fa fa-calendar-minus-o"></i>2021/08/09
+                    </span>
+                    <span>
+                        <i class="fa fa-pencil-square-o"></i>TANGJIE
+                    </span>
+                    <span>
+                        <i class="fa fa-fire"></i>33
+                    </span>
+                </div>
+                <p>简介</p>
+                <div class="btn_box">
+                    <button class="button-default">阅读详情</button>
+                </div>
+            </li>
+        </ul>
+        <div class="pagenation">
+            <button class="pre">上一页</button>
+            <div class="txt">第0页</div>
+            <button class="next">下一页</button>
+        </div>
+    </div>
+    <div class="ios"></div>
 </div>
 </template>
 
