@@ -1,0 +1,79 @@
+.home {
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.05);
+    font-family: -apple-system, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    .slider {
+        padding: 15px 0;
+        height: 200px !important;
+        overflow: hidden;
+        .slides {
+            background-image: url(../../assets/img/a2.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 200px !important;
+            overflow: hidden;
+            li{
+                &::after{
+                    display: none;
+                }
+                &::before{
+                    display: none;
+                }
+            }
+            h2{
+                font-size: 16px;
+            }
+            h4{
+                font-size: 14px;
+            }
+        }
+    }
+    .site-brand .title{
+        font-size: 16px;
+    }
+    .section{
+        padding: 0;
+        padding-top: 10px;
+        border-radius: 8px;
+        .content_label{
+            font-size: 14px;
+        }
+    }
+    .who-we-are{
+        margin: 15px;
+        background-color: #ffffff;
+        i{
+            width: 45px;
+            height: 45px;
+            line-height:45px;
+            margin-bottom:10px;
+            background-color: rgba(0,0,0,0.03);
+            &.fa-th-large{
+                color: #2bb9ad;
+            }
+            &.fa-laptop{
+                color: #3498DB;
+            }
+            &.fa-leaf{
+                color: #64d572;
+            }
+        }
+    }
+    .quote{
+        margin: 15px;
+    }
+    .blog-list{
+        margin: 15px 15px 0px 15px;
+        position: relative;
+        padding-bottom: 150px;
+        .list_hd{
+            
+        }
+        .blog-detailt{
+            padding: 10px;
+            background-color: #ffffff;
+            margin: 0;
+        }
+    }
+}
