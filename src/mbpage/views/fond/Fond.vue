@@ -4,7 +4,6 @@
     background-color: #ffffff;
     font-size: 16px;
     padding-bottom: 10px;
-    padding-top: 70px;
 }
 .container {
   position: relative;

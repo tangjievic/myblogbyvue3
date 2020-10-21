@@ -1,13 +1,6 @@
 <style lang="less" scoped>
-.view_page{
-    &::before{
-        content: '';
-        display: block;
-        height: 70px;
-    }
-}
 .footer-blog_desc{
-        margin-top: 20px;
+    margin-top: 20px;
     text-align: center;
     font-size: 12px;
     color: rgba(0,0,0,.5);

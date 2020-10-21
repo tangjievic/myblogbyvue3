@@ -117,6 +117,11 @@ export default {
     .site-brand .title{
         font-size: 16px;
     }
+    &::before{
+        content: '';
+        display: block;
+        height: 70px;
+    }
 }
 .ios{
     padding-bottom: constant(safe-area-inset-bottom);

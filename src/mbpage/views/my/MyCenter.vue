@@ -1,11 +1,4 @@
 <style lang="less" scoped>
-.view_page{
-    &::before{
-        content: '';
-        display: block;
-        height: 70px;
-    }
-}
 </style>
 <template>
     <div class="view_page">
