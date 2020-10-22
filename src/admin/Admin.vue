@@ -8,10 +8,14 @@
 import {
     useRouter
 } from 'vue-router';
+//import { computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
     name: 'Admin',
     setup() {
         const router = useRouter();
+        const store = useStore()
+        console.log(store)
         router.beforeEach((to, from, next) => {
             // ...
             if (to.matched.length === 0) {
@@ -21,6 +25,7 @@ export default {
             }
             //console.log(to, from, next, '路由守卫')
         })
+
     }
 }
 </script>

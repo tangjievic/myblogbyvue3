@@ -1,4 +1,8 @@
-import { createApp } from 'vue'
-import Admin from './Admin.vue'
+import { createApp } from 'vue';
+import Admin from './Admin.vue';
 import router from './router';
-createApp(Admin).use(router).mount('#admin-apply')
+import store from './store/index.js';
+const admin = createApp(Admin);
+admin.use(router);
+admin.use(store);
+admin.mount('#admin-apply');
