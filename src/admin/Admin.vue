@@ -9,10 +9,26 @@ import {
     useRouter
 } from 'vue-router';
 //import { computed } from 'vue'
-import { useStore } from 'vuex'
+import {
+    useStore
+} from 'vuex'
+
+function pageLoadInit() {
+    const view = document.getElementById('loading_init');
+    if (view) {
+        setTimeout(() => {
+            view.style.opacity = '0';
+        }, 1500);
+        setTimeout(() => {
+            view.style.display = 'none';
+        }, 2000);
+    }
+}
+
 export default {
     name: 'Admin',
     setup() {
+        pageLoadInit();
         const router = useRouter();
         const store = useStore()
         console.log(store)

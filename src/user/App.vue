@@ -5,10 +5,21 @@
 </template>
 
 <script>
+function pageLoadInit() {
+    const view = document.getElementById('loading_init');
+    if (view) {
+        setTimeout(() => {
+            view.style.opacity = '0';
+        }, 1500);
+        setTimeout(() => {
+            view.style.display = 'none';
+        }, 2000);
+    }
+}
 export default {
     name: 'App',
     setup() {
-
+        pageLoadInit()
     }
 }
 </script>

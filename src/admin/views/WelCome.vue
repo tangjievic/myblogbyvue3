@@ -31,7 +31,7 @@
 
                 <ul class="nav nav-pills pricing-nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">要点</a>
+                        <a class="nav-link active" href="javascript:;" @click="addCount">要点{{count}}</a>
                     </li>
                 </ul>
             </div>
@@ -147,7 +147,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="text-sm-right d-none d-sm-block">
-                        践行社会主义<i class="mdi mdi-heart text-danger"></i>核心价值观
+                        践行社会主义
+                        <i class="mdi mdi-heart text-danger"></i>核心价值观
                     </div>
                 </div>
             </div>
@@ -158,12 +159,26 @@
 
 <script>
 import {
-    onMounted
+    onMounted,
+    reactive,
+    computed
 } from 'vue';
+import {
+    useStore
+} from 'vuex';
 export default {
     setup() {
+        const store = useStore();
+        const addCount = () => {
+            store.commit('increment')
+        };
         onMounted(() => {
 
+        })
+
+        return reactive({
+            count: computed(() => store.state.count),
+            addCount
         })
     }
 }

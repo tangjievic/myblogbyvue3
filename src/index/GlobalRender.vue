@@ -13,6 +13,19 @@ import LeftTool from '../components/LeftTool.vue';
 import ViewBubble from '../components/ViewBubble.vue';
 import $ from 'jquery';
 import showReel from '../tselement/showreel';
+
+function pageLoadInit() {
+    const view = document.getElementById('loading_init');
+    if (view) {
+        setTimeout(() => {
+            view.style.opacity = '0';
+        }, 1500);
+        setTimeout(() => {
+            view.style.display = 'none';
+        }, 2000);
+    }
+}
+
 export default {
     name: 'Index',
     components: {
@@ -21,6 +34,7 @@ export default {
     },
     setup() {
         onMounted(() => {
+            pageLoadInit();
             showReel($, $);
             $(".ato-content").slide({
                 titCell: ".ato-list-fl ul",

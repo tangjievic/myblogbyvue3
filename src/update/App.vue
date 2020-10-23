@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                 <div :class="['timeline-item','timeline-left']">
+                <div :class="['timeline-item','timeline-left']">
                     <div class="timeline-block">
                         <div class="time-show-btn mt-0">
                             <a href="#" :class="['btn','btn-primary','btn-rounded','w-lg']">开始</a>
@@ -92,10 +92,14 @@
 </template>
 
 <script>
-import { onMounted,reactive } from 'vue';
-function pageLoadInit(){
+import {
+    onMounted,
+    reactive
+} from 'vue';
+
+function pageLoadInit() {
     const view = document.getElementById('loading_init');
-    if(view){
+    if (view) {
         setTimeout(() => {
             view.style.opacity = '0';
         }, 1000);
@@ -104,93 +108,86 @@ function pageLoadInit(){
         }, 1500);
     }
 }
-function goHome(){
-    window.open('/','_self');
+
+function goHome() {
+    window.open('/', '_self');
 }
 export default {
     name: 'Update',
-    components: {
-
-    },
-    setup(){
-        let state = reactive({
-            updataTime:[
-                {
-                    year:2020,
-                    detail:[
-                        {
-                            time:'10月8号',
-                            event:'博客更新至6.1.2',
-                            desc:'新增react打造的移动端'
+    setup() {
+        const state = reactive({
+            updataTime: [{
+                    year: 2020,
+                    detail: [{
+                            time: '10月8号',
+                            event: '博客更新至6.1.2',
+                            desc: '新增react打造的移动端'
                         },
                         {
-                            time:"07月04号",
-                            event:"博客更新至6.1.0",
-                            desc:'初步的规范了博客ui组件库样式的设计，登录模块重新开放，由于后台重写当中，因此暂时关停收藏，点赞等功能'
+                            time: "07月04号",
+                            event: "博客更新至6.1.0",
+                            desc: '初步的规范了博客ui组件库样式的设计，登录模块重新开放，由于后台重写当中，因此暂时关停收藏，点赞等功能'
                         },
                         {
-                            time:'05月15号',
-                            event:"博客更新至6.0.1",
-                            decs:"后台文章修改提交bug修复"
+                            time: '05月15号',
+                            event: "博客更新至6.0.1",
+                            decs: "后台文章修改提交bug修复"
                         },
                         {
-                            time:'04月05号',
-                            event:"博客更新至6.0.0",
-                            decs:"基础样式和排版大改"
+                            time: '04月05号',
+                            event: "博客更新至6.0.0",
+                            decs: "基础样式和排版大改"
                         }
                     ]
                 },
                 {
-                    year:2019,
-                    detail:[
-                        {
-                            time:'09月28号',
-                            event:'博客更新至5.0.0',
-                            desc:'后台改用Think-PHP6'
+                    year: 2019,
+                    detail: [{
+                            time: '09月28号',
+                            event: '博客更新至5.0.0',
+                            desc: '后台改用Think-PHP6'
                         },
                         {
-                            time:'03月04号',
-                            event:'博客更新至4.0.0',
-                            desc:'后台弃用thinkcmf框架改用Think-PHP5进行重构'
-                        },
-                    ]
-                },
-                {
-                    year:2018,
-                    detail:[
-                        {
-                            time:'11月23号',
-                            event:'博客更新至3.1.0',
-                            desc:'由于是虚拟机无法做服务器渲染，为此搭建webpack工程，做普通网页和单页面混合，对具有较高seo权重的页面用普通页面，低的用vue单页面'
-                        },
-                        {
-                            time:'09月28号',
-                            event:'博客更新至3.0.0',
-                            desc:'前端采用vue进行单页面重构'
+                            time: '03月04号',
+                            event: '博客更新至4.0.0',
+                            desc: '后台弃用thinkcmf框架改用Think-PHP5进行重构'
                         },
                     ]
                 },
                 {
-                    year:2017,
-                    detail:[
-                        {
-                            time:'11月78号',
-                            event:'博客更新至2.0.0,采用了thinkCMF框架',
-                            desc:'自此网站在也不是静态网站了，有了后台的支持'
+                    year: 2018,
+                    detail: [{
+                            time: '11月23号',
+                            event: '博客更新至3.1.0',
+                            desc: '由于是虚拟机无法做服务器渲染，为此搭建webpack工程，做普通网页和单页面混合，对具有较高seo权重的页面用普通页面，低的用vue单页面'
                         },
                         {
-                            time:'04月16号',
-                            event:'博客第一版发布',
-                            desc:'全静态网站，主要是jq的使用'
+                            time: '09月28号',
+                            event: '博客更新至3.0.0',
+                            desc: '前端采用vue进行单页面重构'
+                        },
+                    ]
+                },
+                {
+                    year: 2017,
+                    detail: [{
+                            time: '11月78号',
+                            event: '博客更新至2.0.0,采用了thinkCMF框架',
+                            desc: '自此网站在也不是静态网站了，有了后台的支持'
+                        },
+                        {
+                            time: '04月16号',
+                            event: '博客第一版发布',
+                            desc: '全静态网站，主要是jq的使用'
                         },
                     ]
                 }
             ]
         })
-        onMounted(()=>{
+        onMounted(() => {
             pageLoadInit();
         })
-        return{
+        return {
             goHome,
             ...state
         }
@@ -202,28 +199,34 @@ export default {
 @import '../admin/assets/css/icons.min.css';
 @import '../admin/assets/css/app.css';
 @import '../admin/assets/css/bootstrap.min.css';
-@primary:#1abc9c;
-#page-topbar{
+@primary: #1abc9c;
+
+#page-topbar {
     z-index: 500;
 }
-.main-content{
+
+.main-content {
     margin-left: 0;
     margin-top: 90px;
     margin-bottom: 80px;
-    .navbar-brand-box{
-        background-color: #ffffff!important;
-        .logo.logo-light{
+
+    .navbar-brand-box {
+        background-color: #ffffff !important;
+
+        .logo.logo-light {
             font-size: 22px;
-            color:@primary;
+            color: @primary;
         }
     }
-    .gohome_txt{
+
+    .gohome_txt {
         margin-left: 5px;
         position: relative;
         bottom: 4px;
     }
-    .footer{
-        left:0;
+
+    .footer {
+        left: 0;
     }
 }
 </style>

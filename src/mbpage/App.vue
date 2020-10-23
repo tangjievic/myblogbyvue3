@@ -5,10 +5,21 @@
 </template>
 
 <script>
+function pageLoadInit() {
+    const view = document.getElementById('loading_init');
+    if (view) {
+        setTimeout(() => {
+            view.style.opacity = '0';
+        }, 1500);
+        setTimeout(() => {
+            view.style.display = 'none';
+        }, 2000);
+    }
+}
 export default {
     name: 'App',
     setup() {
-
+        pageLoadInit()
     }
 }
 </script>
@@ -24,53 +35,64 @@ export default {
 @import url('assets/css/magnific-popup.css');
 @import url('assets/css/style.css');
 @import url('./views/my/mycenter.less');
-.blog-list{
-        margin: 15px 15px 0px 15px;
-        position: relative;
-        padding: 15px 0;
+
+.blog-list {
+    margin: 15px 15px 0px 15px;
+    position: relative;
+    padding: 15px 0;
+    background-color: #ffffff;
+
+    .blog-detailt {
         background-color: #ffffff;
-        .blog-detailt{
-            background-color: #ffffff;
-            padding: 10px;
-            margin: 0;
-            .art_title{
-                font-size: 15px;
-                padding-bottom: 8px;
-            }
-            .art_tag{
-                display: flex;
-                i{
-                    margin-right: 8px;
-                    font-size: 16px;
-                }
-                .fa-calendar-minus-o{
-                    color: #64d572;
-                }
-                .fa-pencil-square-o{
-                    color: #8E44AD;
-                }
-                .fa-fire{
-                    color: #FA4E4E;
-                }
-                span{
-                    flex: 1;
-                    text-align: center;
-                }
+        padding: 10px;
+        margin: 0;
+
+        .art_title {
+            font-size: 15px;
+            padding-bottom: 8px;
+        }
+
+        .art_tag {
+            display: flex;
+
+            i {
+                margin-right: 8px;
+                font-size: 16px;
             }
 
-            .btn_box{
-                .button-default{
-                    margin: 0;
-                    display: block;
-                    width: 120px;
-                }
+            .fa-calendar-minus-o {
+                color: #64d572;
+            }
+
+            .fa-pencil-square-o {
+                color: #8E44AD;
+            }
+
+            .fa-fire {
+                color: #FA4E4E;
+            }
+
+            span {
+                flex: 1;
+                text-align: center;
+            }
+        }
+
+        .btn_box {
+            .button-default {
+                margin: 0;
+                display: block;
+                width: 120px;
             }
         }
     }
+}
+
 .boder-bos_shaow {
     box-shadow: 0 5px 38px -6px rgba(0, 0, 0, 0.14);
 }
-.slider-tag{
+
+.slider-tag {
     position: absolute;
     top: 8px;
     left: 0;
@@ -81,49 +103,60 @@ export default {
     text-align: center;
     line-height: 20px;
     color: #ffffff;
-    &.warn{
-        background-image: linear-gradient(to right,#f5b649,#FDAF2B);
+
+    &.warn {
+        background-image: linear-gradient(to right, #f5b649, #FDAF2B);
     }
 }
-.border-1px{
+
+.border-1px {
     position: relative;
-    &::after{
+
+    &::after {
         content: "";
         display: block;
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        border-bottom: 1px solid rgba(0,0,0,.1);
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
     }
 }
-.pagenation{
+
+.pagenation {
     display: flex;
     align-items: center;
     padding: 2px 10px;
-    .pre,.next{
+
+    .pre,
+    .next {
         flex: 1;
         background-color: #fff;
         border: 1px solid #d9d9d9;
     }
-    .txt{
+
+    .txt {
         flex: 1.5;
         text-align: center;
     }
 }
-.view_page{
+
+.view_page {
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.05);
-    .site-brand .title{
+
+    .site-brand .title {
         font-size: 16px;
     }
-    &::before{
+
+    &::before {
         content: '';
         display: block;
         height: 70px;
     }
 }
-.ios{
+
+.ios {
     padding-bottom: constant(safe-area-inset-bottom);
     padding-bottom: env(safe-area-inset-bottom);
 }
