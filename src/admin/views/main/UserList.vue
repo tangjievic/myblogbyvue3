@@ -26,13 +26,13 @@ export default {
     setup() {
         provide('columns', [{
                 title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
+                dataIndex: 'id',
+                key: 'id',
             },
             {
-                title: 'Age',
-                dataIndex: 'age',
-                key: 'age',
+                title: '用户名',
+                dataIndex: 'username',
+                key: 'username',
                 scopedSlots: {
                     customRender: 'age'
                 },

@@ -31,7 +31,7 @@
 
                 <ul class="nav nav-pills pricing-nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="javascript:;" @click="addCount">要点{{count}}</a>
+                        <a class="nav-link active" href="javascript:;" @click="addCount">要点</a>
                     </li>
                 </ul>
             </div>
@@ -166,14 +166,19 @@ import {
 import {
     useStore
 } from 'vuex';
+import $alert from '../../wetui/base/alert/alert.js';
 export default {
     setup() {
         const store = useStore();
         const addCount = () => {
             store.commit('increment')
+            $alert({
+                content:"这是一个提示",
+                type:'risk'
+            })
         };
         onMounted(() => {
-
+           
         })
 
         return reactive({

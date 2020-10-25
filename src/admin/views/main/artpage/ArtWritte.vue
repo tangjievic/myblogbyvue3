@@ -14,7 +14,7 @@
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">博文写作/修改</h3>
-            <form class="custom-validation" action="#">
+            <form class="custom-validation needs-validation" action="#">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group row">
