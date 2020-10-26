@@ -2,6 +2,7 @@
 <div>
     <LeftTool></LeftTool>
     <ViewBubble></ViewBubble>
+    <RightTool></RightTool>
 </div>
 </template>
 
@@ -13,6 +14,7 @@ import LeftTool from '../components/LeftTool.vue';
 import ViewBubble from '../components/ViewBubble.vue';
 import $ from 'jquery';
 import showReel from '../tselement/showreel';
+import RightTool from '../components/RightTool.vue';
 
 function pageLoadInit() {
     const view = document.getElementById('loading_init');
@@ -30,7 +32,8 @@ export default {
     name: 'Index',
     components: {
         LeftTool,
-        ViewBubble
+        ViewBubble,
+        RightTool
     },
     setup() {
         onMounted(() => {

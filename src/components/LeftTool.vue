@@ -403,9 +403,9 @@
             </div>
         </li>
         <li class="leftmenu-item">
-            <a href="https://gitee.com/thepigthatwantstofly/tjblog" target="_blank" class="item-link">
+            <a href="javascript:;" target="_blank" class="item-link">
                 <i class="ri-attachment-fill"></i>
-                <span>码云</span>
+                <span>专辑</span>
             </a>
         </li>
     </ul>

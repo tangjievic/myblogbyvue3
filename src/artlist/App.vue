@@ -26,6 +26,9 @@ export default {
     components: {
         LeftTool,
         ViewBubble
+    },
+    setup() {
+        pageLoadInit();
     }
 }
 </script>
