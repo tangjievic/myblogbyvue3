@@ -25,7 +25,6 @@ export default {
 </script>
 
 <style lang="less">
-@import '../admin/assets/libs/fullcalendar/fullcalendar.min.css';
 @import '../admin/assets/css/bootstrap.min.css';
 @import '../admin/assets/css/icons.min.css';
 @import '../admin/assets/css/app.css';
