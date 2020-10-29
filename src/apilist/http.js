@@ -41,6 +41,13 @@ axios.interceptors.response.use(function(response) {
     }
 }, function(error) {
     // 对响应错误做点什么
+    //console.log(error.response,'axios')
+    if(!error.response){
+        $alert({
+            type:'risk',
+            content:'网络连接错误'
+        })
+    }
     if (error.response.status) {
         switch (error.response.status) {
             case 401:
