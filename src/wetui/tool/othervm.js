@@ -11,7 +11,6 @@ function othervm(component, props) {
         }
     })
     const vmmount = vm.mount(otherNodeBox);
-    //console.log(vmmount.$el.scrollTop)
     vmmount.$removeVmNode = () => {
         vm.unmount(otherNodeBox);
         body.removeChild(otherNodeBox)

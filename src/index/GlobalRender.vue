@@ -19,12 +19,8 @@ import RightTool from '../components/RightTool.vue';
 function pageLoadInit() {
     const view = document.getElementById('loading_init');
     if (view) {
-        setTimeout(() => {
-            view.style.opacity = '0';
-        }, 1500);
-        setTimeout(() => {
-            view.style.display = 'none';
-        }, 2000);
+        view.style.opacity = '0';
+        view.style.visibility = "hidden"
     }
 }
 
@@ -57,4 +53,8 @@ export default {
 @import '../style/lesselement/showreel.less';
 @import '../style/lesselement/reward.less';
 @import '../style/lesselement/hotart.less';
+
+.github_btn {
+    background-color: fade(#ffffff, 50%) !important;
+}
 </style>
