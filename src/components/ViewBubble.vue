@@ -63,6 +63,7 @@ class dreamLike extends canvasBase {
     }
     /* 初始化 */
     init(canvasbox) {
+        let askey = false;
         dreamLike.canvasbox = canvasbox
         dreamLike.canvas = dreamLike.canvasbox.querySelector('canvas');
         dreamLike.drawPanel = dreamLike.canvas.getContext('2d');
@@ -75,9 +76,16 @@ class dreamLike extends canvasBase {
         dreamLike.canvas.height = dreamLike.H;
         dreamLike.createItem();
         window.addEventListener('resize', () => {
-            dreamLike.canvas.width = dreamLike.W;
-            dreamLike.canvas.height = dreamLike.H;
-            dreamLike.createItem()
+            if (askey) return
+            askey = true;
+            window.requestAnimationFrame(() => {
+                askey = false;
+                dreamLike.W = dreamLike.canvasbox.offsetWidth;
+                dreamLike.H = dreamLike.canvasbox.offsetHeight;
+                dreamLike.canvas.width = dreamLike.W;
+                dreamLike.canvas.height = dreamLike.H;
+                dreamLike.createItem()
+            })
         })
         //console.log(dreamLike.requestAnimationFrame)
         //dreamLike.s()

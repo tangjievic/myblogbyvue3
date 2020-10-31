@@ -1,48 +1,49 @@
 <style lang="less">
-.toc_box{
+.toc_box {
     transform: translateY(0);
-    transition: top 0.2s ease-in-out,transform 0.2s ease-in-out;
+    transition: top 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
-.toc_box.fixed-top{
-    position: fixed!important;
+
+.toc_box.fixed-top {
+    position: fixed !important;
     top: 75px;
     width: 300px;
 }
-.toc{
+
+.toc {
     box-sizing: border-box;
-    padding:4px 0;
+    padding: 4px 0;
     overflow: hidden;
     min-height: 200px;
 }
 
 .toc {
-    width        : 100%;
-    max-width    : 350px;
-    color        : #333;
-    position     : relative;
-    background   : #fff;
+    width: 100%;
+    max-width: 350px;
+    color: #333;
+    position: relative;
+    background: #fff;
 }
+
 .toc-hightlight {
-    width      : 278px;
-    background : #eee;
-    position   : absolute;
-    left       : 10px;
-    top        : 0;
+    width: 278px;
+    background: #eee;
+    position: absolute;
+    left: 10px;
+    top: 0;
     border-left: 3px solid #1ABC9C;
-    transition : all .2s ease;
+    transition: all .2s ease;
 }
-
-
 
 .toc-brand {
-    padding      : 0 15px;
-    font-weight  : bold;
-    font-size    : 18px;
-    line-height  : inherit;
-    white-space  : nowrap;
-    display      : block;
-    width        : 100%;
-    overflow     : hidden;
+    padding: 0 15px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: inherit;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
@@ -60,22 +61,22 @@
 }
 
 .toc-navbar {
-    position       : relative;
-    display        : block;
+    position: relative;
+    display: block;
     scroll-behavior: smooth;
     width: 100%;
     box-sizing: border-box;
-    max-height: 400px!important;
-    overflow-y: auto!important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
     overflow-x: hidden;
 }
 
 /* 滚动条 */
 .toc-navbar::-webkit-scrollbar-thumb:horizontal {
     /*水平滚动条的样式*/
-    width           : 5px;
+    width: 5px;
     background-color: #CCCCCC;
-    border-radius   : 6px;
+    border-radius: 6px;
 }
 
 .toc-navbar::-webkit-scrollbar-track-piece {
@@ -94,53 +95,53 @@
 
 .toc-navbar::-webkit-scrollbar-thumb:vertical {
     /*垂直滚动条的样式*/
-    height          : 50px;
+    height: 50px;
     background-color: #999;
-    border-radius   : 4px;
-    outline         : 2px solid #fff;
-    outline-offset  : -2px;
-    border          : 2px solid #fff;
+    border-radius: 4px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 2px solid #fff;
 }
 
 .toc-navbar::-webkit-scrollbar-thumb:hover {
     /*滚动条的hover样式*/
-    height          : 50px;
+    height: 50px;
     background-color: #9f9f9f;
-    border-radius   : 4px;
+    border-radius: 4px;
 }
 
 .toc-nav {
     box-sizing: border-box;
-    display      : block;
-    padding-left : 0;
+    display: block;
+    padding-left: 0;
     margin-bottom: 0;
-    transition   : all .3s ease;
+    transition: all .3s ease;
 }
 
 .toc-link {
     box-sizing: border-box;
-    display        : block;
-    padding        : 0.2*10px 1.7*10px;
-    font-size      : 14px;
+    display: block;
+    padding: 0.2*10px 1.7*10px;
+    font-size: 14px;
     text-decoration: none;
-    color          : #555;
-    position       : relative;
+    color: #555;
+    position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 600;
 }
+
 .toc-link.active::before,
 .toc-link:hover::before {
-    background: fade(#1ABC9C,60%);
+    background: fade(#1ABC9C, 60%);
 }
 
 .toc-link.active,
 .toc-link:hover {
-    color: fade(#1ABC9C,60%);
+    color: fade(#1ABC9C, 60%);
     font-weight: 600;
 }
-
 
 .toc-link.ml-1 {
     font-weight: 600;
@@ -168,60 +169,66 @@
 }
 </style>
 <template>
-    <div ref="artnav"></div>
+<div ref="artnav"></div>
 </template>
+
 <script>
 import arthorNav from './archor.js';
-import { onMounted,ref } from 'vue';
+import {
+    onMounted,
+    ref
+} from 'vue';
 import $ from 'jquery';
 
-function pageLoadInit(){
+function pageLoadInit() {
     const view = document.getElementById('loading_init');
-    if(view){
-        setTimeout(() => {
-            view.style.opacity = '0';
-        }, 1500);
-        setTimeout(() => {
-            view.style.display = 'none';
-        }, 2000);
+    if (view) {
+        view.style.opacity = '0';
+        view.style.visibility = "hidden"
     }
 }
 
-function lisenSroll (domTowinTop){
-    let document_height = $(document).height()
-    $(document).scroll(()=>{
-       let scroll_top = $(window).scrollTop();
-       if(scroll_top + 70>domTowinTop){
-            if((document_height - scroll_top)<1050){
-                $('.toc_box').css({
-                    transform:` translateY(-88px)`
-                })
-            }else{
-                $('.toc_box').css({
-                    transform:` translateY(0)`
-                })
+function lisenSroll(domTowinTop) {
+    let document_height = $(document).height();
+    let askey = false
+    $(document).scroll(() => {
+        if (askey) return;
+        askey = true
+        window.requestAnimationFrame(() => {
+            askey = false
+            let scroll_top = $(window).scrollTop();
+            if (scroll_top + 70 > domTowinTop) {
+                if ((document_height - scroll_top) < 1050) {
+                    $('.toc_box').css({
+                        transform: ` translateY(-88px)`
+                    })
+                } else {
+                    $('.toc_box').css({
+                        transform: ` translateY(0)`
+                    })
+                }
+                if ($('.toc_box').hasClass('fixed-top')) {
+                    return
+                }
+                $('.toc_box').addClass('fixed-top')
+            } else {
+                $('.toc_box').removeClass('fixed-top')
             }
-            if($('.toc_box').hasClass('fixed-top')){
-                return
-            }
-            $('.toc_box').addClass('fixed-top')
-       }else{
-            $('.toc_box').removeClass('fixed-top')
-       }
+        })
     })
 }
 
 export default {
-    setup(){
+    setup() {
         let artnav = ref(null);
-        onMounted(()=>{
+        onMounted(() => {
             //确定元素距离页面顶部距离
             let offsetTop = $(artnav.value).offset().top;
             new arthorNav({
-                classNames:{
+                classNames: {
                     toc: 'toc',
                     hidden: 'toc-hidden',
-                    fxied:false,
+                    fxied: false,
                     brand: 'toc-brand',
                     navbar: 'toc-navbar',
                     hightlight: 'toc-hightlight',
