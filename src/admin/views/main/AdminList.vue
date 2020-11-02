@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-xl-3">
-            <div ref="modal_dialog" class="modal fade tabel-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal fade tabel-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

@@ -28,7 +28,10 @@
                     @click="addVcate"
                     >添加视频分类</button>
                 </div>
-                <TablePanel :columns="vcate" :data="vacatedata"></TablePanel>
+                <TablePanel :columns="vcate" 
+                 @edit="editVcItem"
+                @delete="deleteVcItem"
+                :data="vacatedata"></TablePanel>
             </div>
         </template>
     </Tabs>
@@ -94,22 +97,62 @@
             </form>
         </div>
     </div>
+    <div class="modal fade tabel-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0">提示:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    确定要删除该条数据？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light waves-effect" 
+                    data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" 
+                    data-dismiss="modal" @click="deleteEvent">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <wet-model type="info" 
+    :show="VcateShow"
+    @cancel="cancelModel"
+    @confirm="confirmModel"
+    title="视频分类名编辑">
+        <div>
+           <div class="form-group">
+                <label>视频栏目名称 </label>
+                <input type="text" v-model="catename" class="form-control" required placeholder="请填写">
+                <div class="invalid-feedback">
+                    栏目名称不能为空
+                </div>
+            </div>
+        </div>
+    </wet-model>
 </ContainerFluid>
 </template>
 
 <script>
 import {
-    provide, reactive, toRefs,ref
+    provide, reactive, toRefs,ref,onMounted,onBeforeMount
 } from 'vue';
 import ContainerFluid from '../../layout/ContainerFluid';
 import Tabs from '../../components/Tabs';
 import TablePanel from '../../components/TablePanel';
-//import $alert from '../../../wetui/base/alert/alert';
+import $alert from '../../../wetui/base/alert/alert';
+import { initVlitForm } from '../../common/common';
+import { addVcate as addVcateDate,getVcate,deleVcate } from '../../../apilist/index';
+import WetModel from '../../../wetui/base/modal/Modal.vue';
 export default {
     components: {
         ContainerFluid,
         Tabs,
-        TablePanel
+        TablePanel,
+        WetModel
     },
 
     setup() {
@@ -155,8 +198,10 @@ export default {
                 }
             ],
             vacatedata:[],
+            selectedItem:{},
             catename:'',
             addType:0,//默认添加视频；0添加视频，1添加视频栏目
+            VcateShow:false
         })
         const submitdata = reactive({
             title:'',
@@ -166,19 +211,86 @@ export default {
         })
         //添加数据操作
         const addViode = ()=>{
-            status.addType = 0
+            status.addType = 0;
+            submitdata.title ='';
+            submitdata.vcate_id = '';
+            submitdata.vcate_cname = '';
+            submitdata.url = '';
         }
         const addVcate = ()=>{
             status.addType = 1
+            status.catename = '';
         }
-        //
+        const deleteEvent = ()=>{
+            if(status.addType === 0){
+                return
+            }else{
+                deleVcate(status.selectedItem).then(()=>{
+                    $alert({
+                        type:'success',
+                        content:'删除成功'
+                    })
+                    getVcate().then((res)=>{
+                        status.vacatedata = res.result;
+                    })
+                })
+            }
+        }
+        const deleteVcItem = (event)=>{
+            status.selectedItem = event;
+            status.addType = 1
+        }
+        const editVcItem = (event) =>{
+            status.selectedItem = event;
+            status.catename = event.catename;
+            status.VcateShow = true;
+        }
+        const cancelModel = ()=>{
+            status.VcateShow = false;
+        }
+        const confirmModel = ()=>{
+
+        }
+        onBeforeMount(()=>{
+            getVcate().then((res)=>{
+                status.vacatedata = res.result;
+            })
+        })
+        onMounted(()=>{
+            initVlitForm();
+            //提交表单
+            const forms = validationfrom.value;
+            forms.addEventListener('submit', function() {
+                const waitValitime = setTimeout(()=>{
+                    if(forms.getAttribute('data-valresult') !== '0'){
+                        addVcateDate({
+                            catename:status.catename
+                        }).then(()=>{
+                            $alert({
+                                content:"新增成功",
+                                type:'success'
+                            })
+                            getVcate();
+                        })
+                        const formModel = forms.querySelector('.modalmiss');
+                        formModel.click();
+                    }
+                    clearTimeout(waitValitime)
+                },500)
+            })
+        })
         return{
             ...toRefs(status),
             modal_dialog,
             validationfrom,
             submitdata,
             addViode,
-            addVcate
+            addVcate,
+            deleteEvent,
+            deleteVcItem,
+            editVcItem,
+            cancelModel,
+            confirmModel
         }
     }
 

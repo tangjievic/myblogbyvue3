@@ -13,9 +13,26 @@ const deleAdmin = (params) => {
     return postCgi('admin/delete', params)
 }
 
+const addVcate = (params) => {
+    return postCgi('vcate/add', params)
+}
+const deleVcate = (params) => {
+    return postCgi('vcate/delete', params)
+}
+const editeVcate = (params) => {
+    return postCgi('vcate/edite', params)
+}
+const getVcate = () => {
+    return getCgi('vcate/get', {})
+}
+
 export {
     getAdminList,
     getAdminMsg,
     addAdmin,
-    deleAdmin
+    deleAdmin,
+    addVcate,
+    deleVcate,
+    editeVcate,
+    getVcate
 }

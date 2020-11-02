@@ -3,18 +3,22 @@
 </style>
 
 <template>
-<ContainerFluid title="管理员列表" moudleText="基础菜单" routerText="管理员类">
-    <TablePanel>
-        <template v-slot:age="{item}">
-            <a href="#!">{{item.age}}</a>
-        </template>
-    </TablePanel>
+<ContainerFluid title="用户列表" moudleText="基础菜单" routerText="用户管理">
+    <div class="card">
+        <div class="card-body">
+            <TablePanel>
+                <template v-slot:createtime="{item}">
+                    <a href="#!">{{item.createtime}}</a>
+                </template>
+            </TablePanel>
+        </div>
+    </div>
 </ContainerFluid>
 </template>
 
 <script>
 import {
-    provide
+reactive, toRefs
 } from 'vue'
 import TablePanel from '../../components/TablePanel';
 import ContainerFluid from '../../layout/ContainerFluid';
@@ -24,47 +28,49 @@ export default {
         ContainerFluid
     },
     setup() {
-        provide('columns', [{
-                title: 'Name',
-                dataIndex: 'id',
-                key: 'id',
-            },
-            {
-                title: '用户名',
-                dataIndex: 'username',
-                key: 'username',
-                scopedSlots: {
-                    customRender: 'age'
-                },
-            },
-            {
-                title: 'Address',
-                dataIndex: 'address',
-                key: 'address',
-            },
-        ]);
-        provide('data', [{
-                key: '1',
-                name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-            },
-            {
-                key: '2',
-                name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-                tags: ['loser'],
-            },
-            {
-                key: '3',
-                name: 'Joe Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                tags: ['cool', 'teacher'],
-            }
-        ])
+        const status = reactive({
+            columns:[{
+                title:'ID',
+                dataIndex:'id',
+                key:'id'
+            },{
+                title:'账号/用户名',
+                dataIndex:'username',
+                key:'username'
+            },{
+                title:'个人积分',
+                dataIndex:'credits',
+                key:'credits'
+            },{
+                title:'昵称',
+                dataIndex:'nickname',
+                key:'nickname'
+            },{
+                title:'创建时间',
+                dataIndex:'createtime',
+                key:'createtime',
+                scopedSlots:{
+                    customRender:'createtime'
+                }
+            },{
+                title:'会员等级',
+                dataIndex:'level',
+                key:'level'
+            },{
+                title:'职业',
+                dataIndex:'profession',
+                key:'profession'
+            },{
+                title:'签名',
+                dataIndex:'signature',
+                key:'signature'
+            }],
+            data:[]
+        })
+
+        return {
+            ...toRefs(status)
+        }
     }
 }
 </script>

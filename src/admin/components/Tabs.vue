@@ -40,8 +40,9 @@ import {
 export default {
     components: {},
     setup() {
+        const tabsPage = inject('tabsPage');
         const state = reactive({
-            tabsPage: inject('tabsPage')
+            tabsPage: tabsPage
         })
         return {
             ...state

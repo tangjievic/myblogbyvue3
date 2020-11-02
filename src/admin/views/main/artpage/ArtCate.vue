@@ -7,26 +7,35 @@
     <Tabs>
         <template v-slot:catelist>
             <div>
-                <TablePanel></TablePanel>
+                <TablePanel 
+                :data="cateData"
+                :columns="cateColumns" ></TablePanel>
             </div>
         </template>
         <template v-slot:taglist>
             <div>
-                <TablePanel></TablePanel>
+                <TablePanel
+                :columns="tagColumns"
+                :data="tagsData"></TablePanel>
             </div>
         </template>
         <template v-slot:cateform>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">栏目类型添加/编辑</h4>
-                    <form class="custom-validation" action="#" novalidate="">
+                    <h4 class="needs-validation">栏目类型添加/编辑</h4>
+                    <form class="needs-validation" novalidate>
                         <div class="form-group">
                             <label>文章分类名</label>
-                            <input type="text" class="form-control" required placeholder="请填写">
+                            <input type="text" 
+                            v-model="submitCate.catename"
+                            class="form-control" required placeholder="请填写">
+                            <div class="invalid-feedback">
+                                分类名不能为空
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>父亲级栏目</label>
-                            <select class="form-control" required>
+                            <select class="form-control" v-model="submitCate.pid">
                                 <option :value="0">顶级栏目</option>
                                 <option :value="1">-</option>
                             </select>
@@ -45,10 +54,15 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">文章标签添加/编辑</h4>
-                    <form class="custom-validation" action="#" novalidate="">
+                    <form class="needs-validation"  novalidate>
                         <div class="form-group">
                             <label>文章标签名</label>
-                            <input type="text" class="form-control" required placeholder="请填写">
+                            <input type="text" 
+                            v-model="submitTag.tagname"
+                            class="form-control" required placeholder="请填写">
+                            <div class="invalid-feedback">
+                                标签名不能为空
+                            </div>
                         </div>
                         <div class="form-group mb-0">
                             <div>
@@ -70,11 +84,13 @@
 
 <script>
 import {
-    provide
+  onMounted,
+    provide, reactive, toRefs
 } from 'vue';
 import ContainerFluid from '../../../layout/ContainerFluid';
 import Tabs from '../../../components/Tabs';
 import TablePanel from '../../../components/TablePanel';
+import { initVlitForm } from '../../../common/common';
 export default {
     components: {
         ContainerFluid,
@@ -95,47 +111,54 @@ export default {
                 key: 'cateform'
             },
         ])
-        provide('columns', [{
-                title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
-            },
-            {
-                title: 'Age',
-                dataIndex: 'age',
-                key: 'age',
-                scopedSlots: {
-                    customRender: 'age'
+        const status = reactive({
+            cateColumns:[
+                {
+                    title: 'ID',
+                    dataIndex: 'id',
+                    key:'id'
                 },
-            },
-            {
-                title: 'Address',
-                dataIndex: 'address',
-                key: 'address',
-            },
-        ]);
-        provide('data', [{
-                key: '1',
-                name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-            },
-            {
-                key: '2',
-                name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-                tags: ['loser'],
-            },
-            {
-                key: '3',
-                name: 'Joe Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                tags: ['cool', 'teacher'],
-            }
-        ])
+                {
+                    title:'文章栏目名',
+                    dataIndex:'catename',
+                    key:'catename'
+                },
+                {
+                    title:'所属栏目',
+                    dataIndex:'pid',
+                    key:'pid'
+                }
+            ],
+            tagColumns:[
+                {
+                    title: 'ID',
+                    dataIndex: 'id',
+                    key:'id'
+                },
+                {
+                    title: '文章归档标签',
+                    dataIndex: 'tagname',
+                    key:'tagname'
+                }
+            ],
+            cateData:[],
+            tagsData:[]
+        })
+        const submitCate = reactive({
+            catename:'',
+            pid:'0'
+        })
+        const submitTag = reactive({
+            tagname:''
+        })
+        onMounted(()=>{
+            initVlitForm()
+        })
+        return{
+            ...toRefs(status),
+            submitCate,
+            submitTag
+        }
     }
 }
 </script>

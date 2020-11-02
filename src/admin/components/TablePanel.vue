@@ -98,7 +98,7 @@ export default {
             }
         }
     },
-    emits:['tableEdit','tableTrash'],
+    emits:['edit','delete'],
     setup(props) {
         return reactive({
             props
