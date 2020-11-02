@@ -102,6 +102,7 @@ import TablePanel from '../../components/TablePanel';
 import ContainerFluid from '../../layout/ContainerFluid';
 import $alert from '../../../wetui/base/alert/alert';
 import { getAdminList,deleAdmin,addAdmin } from '../../../apilist';
+import { initVlitForm } from '../../common/common';
 export default {
     components: {
         TablePanel,
@@ -163,7 +164,6 @@ export default {
             //提交表单数据
             const forms = validationfrom.value;
             forms.addEventListener('submit', function() {
-                console.log()
                 const waitValitime = setTimeout(()=>{
                     if(forms.getAttribute('data-valresult') !== '0'){
                         if(adminform.password === adminform.repassword){
@@ -189,6 +189,7 @@ export default {
                     clearTimeout(waitValitime)
                 },500)
             })
+            initVlitForm();
         })
         return {
             ...toRefs(status),

@@ -1,4 +1,10 @@
 <style lang="less">
+.notdata{
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+}
 </style>
 <template>
 <div class="table-responsive">
@@ -27,7 +33,7 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody v-if="data&&data.length!==0">
                         <tr role="row" class="odd" v-for="(item,index) in data" :key="item.key?item.key:index">
                             <td class="dtr-control">
                                 <div class="custom-control custom-checkbox">
@@ -57,6 +63,9 @@
                             </td>
                         </tr>
                     </tbody>
+                    <tr v-if="data.length === 0" class="notdata">
+                        暂无数据!!!
+                    </tr>
                 </table>
             </div>
         </div>
@@ -82,7 +91,12 @@ export default {
     },
     props:{
         columns:Array,
-        data:Array
+        data:{
+            type: Array,
+            default:()=>{
+                return []
+            }
+        }
     },
     emits:['tableEdit','tableTrash'],
     setup(props) {
