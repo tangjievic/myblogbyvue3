@@ -1,9 +1,17 @@
 <style lang="less">
-.notdata{
+.notdata {
     text-align: center;
     height: 50px;
     line-height: 50px;
     font-size: 22px;
+    position: relative;
+
+    &::after {
+        content: '暂无数据!!!';
+        display: block;
+        position: absolute;
+        width: 100%;
+    }
 }
 </style>
 <template>
@@ -47,25 +55,12 @@
                                 <slot v-else :name="its.scopedSlots.customRender" v-bind:item="item"></slot>
                             </td>
                             <td>
-                                <a href="javascript:void(0);" 
-                                class="mr-3 text-primary" 
-                                data-toggle="tooltip" 
-                                data-placement="top" title=""
-                                @click="tableEdit(item)"
-                                data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                <a href="javascript:void(0);" 
-                                class="text-danger" 
-                                data-placement="top" title="" 
-                                data-toggle="modal"
-                                data-target=".tabel-example-modal-center"
-                                @click="tableTrash(item)"
-                                data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
+                                <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" @click="tableEdit(item)" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                <a href="javascript:void(0);" class="text-danger" data-placement="top" title="" data-toggle="modal" data-target=".tabel-example-modal-center" @click="tableTrash(item)" data-original-title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
                             </td>
                         </tr>
                     </tbody>
-                    <tr v-if="data.length === 0" class="notdata">
-                        暂无数据!!!
-                    </tr>
+                    <tr v-if="data.length === 0" class="notdata"></tr>
                 </table>
             </div>
         </div>
@@ -89,27 +84,27 @@ export default {
     components: {
         Paginate
     },
-    props:{
-        columns:Array,
-        data:{
+    props: {
+        columns: Array,
+        data: {
             type: Array,
-            default:()=>{
+            default: () => {
                 return []
             }
         }
     },
-    emits:['edit','delete'],
+    emits: ['edit', 'delete'],
     setup(props) {
         return reactive({
             props
         })
     },
-    methods:{
-        tableEdit(item){
-            this.$emit('edit',item)
+    methods: {
+        tableEdit(item) {
+            this.$emit('edit', item)
         },
-        tableTrash(item){
-            this.$emit('delete',item)
+        tableTrash(item) {
+            this.$emit('delete', item)
         }
     }
 };

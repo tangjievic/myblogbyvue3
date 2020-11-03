@@ -1,11 +1,13 @@
 <style lang="less">
-#sidebar-menu{
-    .selected{
-        background-color:fade(#20242f,60%);
-        &>.waves-effect{
-            color: #d7e4ec!important;
-            &>.icontext{
-                color: #d7e4ec!important;
+#sidebar-menu {
+    .selected {
+        background-color: fade(#20242f, 60%);
+
+        &>.waves-effect {
+            color: #d7e4ec !important;
+
+            &>.icontext {
+                color: #d7e4ec !important;
             }
         }
     }
@@ -60,15 +62,21 @@
                         <span>分类&标签</span>
                     </a>
                 </li>
-                <li :class="[current==='artwritte'?'selected':'']">
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="icontext ri-layout-3-line"></i>
                         <span>文章管理</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li :class="[current==='artwritte'?'selected':'']"><a href="javascript:;" @click="goPage('artwritte')">文章列表</a></li>
-                        <li :class="[current==='artwritte'?'selected':'']"><a href="javascript:;" @click="goPage('artwritte')">文章写作</a></li>
-                        <li :class="[current==='artwritte'?'selected':'']"><a href="javascript:;" @click="goPage('artwritte')">文章修改</a></li>
+                        <li :class="[current==='artlist'?'selected':'']">
+                            <a href="javascript:;" @click="goPage('artlist')" class="waves-effect">文章列表</a>
+                        </li>
+                        <li :class="[current==='artwritte'?'selected':'']">
+                            <a href="javascript:;" @click="goPage('artwritte')" class="waves-effect">文章写作</a>
+                        </li>
+                        <li :class="[current==='artedite'?'selected':'']">
+                            <a href="javascript:;" @click="goPage('artedite')" class="waves-effect">文章修改</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -98,9 +106,9 @@ export default {
         const router = useRouter();
         const route = useRoute();
         const status = reactive({
-            current:'welcome'
+            current: 'welcome'
         })
-        watchEffect(()=>{
+        watchEffect(() => {
             status.current = route.name
 
         })

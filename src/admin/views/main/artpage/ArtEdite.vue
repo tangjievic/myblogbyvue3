@@ -10,7 +10,7 @@
 </style>
 
 <template>
-<ContainerFluid title="博文写作" moudleText="文章系统" routerText="文章写作">
+<ContainerFluid title="博文编辑" moudleText="文章系统" routerText="文章编辑">
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">博文写作</h3>

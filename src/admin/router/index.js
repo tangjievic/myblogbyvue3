@@ -5,6 +5,8 @@ import AdminList from '../views/main/AdminList.vue';
 import ArtWritte from '../views/main/artpage/ArtWritte.vue';
 import UserList from '../views/main/UserList';
 import ArtCate from '../views/main/artpage/ArtCate.vue';
+import ArtList from '../views/main/artpage/ArtList.vue';
+import ArtEdite from '../views/main/artpage/ArtEdite.vue';
 import SysSeting from '../views/main/SysSeting.vue';
 import VideoPage from '../views/main/VideoPage.vue';
 const routers = [{
@@ -25,6 +27,16 @@ const routers = [{
                 path: 'artwritte',
                 name: 'artwritte',
                 component: ArtWritte,
+            },
+            {
+                path: 'artlist',
+                name: 'artlist',
+                component:ArtList
+            },
+            {
+                path:'artedite',
+                name:'artedite',
+                component:ArtEdite
             },
             {
                 path:"artcate",
