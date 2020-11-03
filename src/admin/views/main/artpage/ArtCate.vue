@@ -84,7 +84,7 @@
 
 <script>
 import {
-  onMounted,
+    onMounted,
     provide, reactive, toRefs
 } from 'vue';
 import ContainerFluid from '../../../layout/ContainerFluid';

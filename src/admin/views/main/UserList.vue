@@ -11,6 +11,7 @@
                     <a href="#!">{{item.createtime}}</a>
                 </template>
             </TablePanel>
+            <Pagination :total="50" :current="2"></Pagination>
         </div>
     </div>
 </ContainerFluid>
@@ -23,10 +24,12 @@ import {
 } from 'vue'
 import TablePanel from '../../components/TablePanel';
 import ContainerFluid from '../../layout/ContainerFluid';
+import Pagination from 'ant-design-vue/lib/pagination';
 export default {
     components: {
         TablePanel,
-        ContainerFluid
+        ContainerFluid,
+        Pagination
     },
     setup() {
         const status = reactive({

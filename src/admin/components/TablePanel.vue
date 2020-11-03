@@ -64,26 +64,22 @@
                 </table>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-12 col-md-5">
             </div>
             <div class="col-sm-12 col-md-7">
                 <Paginate></Paginate>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 </template>
 
 <script>
-import Paginate from './Paginate';
 import {
     reactive
 } from 'vue';
 export default {
-    components: {
-        Paginate
-    },
     props: {
         columns: Array,
         data: {

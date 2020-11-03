@@ -35,7 +35,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">文章作者</label>
                             <div class="col-md-10">
-                                <input class="form-control" v-model="submitArt.author" type="text" value="TANGJIE" required>
+                                <input class="form-control" v-model="submitArt.author" type="text" required>
                                 <div class="invalid-feedback">
                                     文章作者不能为空
                                 </div>

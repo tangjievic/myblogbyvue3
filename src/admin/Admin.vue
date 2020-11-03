@@ -53,4 +53,5 @@ export default {
 @import './assets/css/bootstrap.min.css';
 @import './assets/css/icons.min.css';
 @import './assets/css/app.css';
+@import './style/pagination.less';
 </style>

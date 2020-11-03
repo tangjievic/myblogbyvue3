@@ -55,18 +55,22 @@
                         </div>
                         <div class="form-group">
                             <label>视频所属栏目</label>
-                            <input type="password" v-model="submitdata.vcate_cname" class="form-control" required placeholder="请填写">
+                            <select class="form-control" required v-model="submitdata.vcate_id">
+                                <option :value="item.id" v-for="(item,index) in vacatedata" :key="index">{{item.catename}}</option>
+                                <!-- <option :value="1">Small select</option> -->
+                            </select>
+                            <!-- <input type="password" v-model="submitdata.vcate_cname" class="form-control" required placeholder="请填写"> -->
                             <div class="invalid-feedback">
                                视频所属栏目不能为空
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>视频所属栏目id</label>
                             <input type="password" v-model="submitdata.vcate_id" class="form-control" required placeholder="请填写">
                             <div class="invalid-feedback">
                                 视频所属栏目不能空
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label>视频链接地址</label>
                             <input type="password" v-model="submitdata.url" class="form-control" required placeholder="请填写">
@@ -126,7 +130,7 @@
         <div>
            <div class="form-group">
                 <label>视频栏目名称 </label>
-                <input type="text" v-model="catename" class="form-control" required placeholder="请填写">
+                <input type="text" v-model="selectedItem.catename" class="form-control" required placeholder="请填写">
                 <div class="invalid-feedback">
                     栏目名称不能为空
                 </div>
@@ -145,7 +149,7 @@ import Tabs from '../../components/Tabs';
 import TablePanel from '../../components/TablePanel';
 import $alert from '../../../wetui/base/alert/alert';
 import { initVlitForm } from '../../common/common';
-import { addVcate as addVcateDate,getVcate,deleVcate } from '../../../apilist/index';
+import { addVcate as addVcateDate,getVcate,deleVcate,editeVcate } from '../../../apilist/index';
 import WetModel from '../../../wetui/base/modal/Modal.vue';
 export default {
     components: {
@@ -213,8 +217,7 @@ export default {
         const addViode = ()=>{
             status.addType = 0;
             submitdata.title ='';
-            submitdata.vcate_id = '';
-            submitdata.vcate_cname = '';
+            submitdata.vcate_id = 1;
             submitdata.url = '';
         }
         const addVcate = ()=>{
@@ -242,19 +245,27 @@ export default {
         }
         const editVcItem = (event) =>{
             status.selectedItem = event;
-            status.catename = event.catename;
             status.VcateShow = true;
         }
         const cancelModel = ()=>{
             status.VcateShow = false;
         }
         const confirmModel = ()=>{
-
+            editeVcate(status.selectedItem).then((res)=>{
+                if(res.status === 20000){
+                    $alert({
+                        type:'success',
+                        content:res.message
+                    })
+                    status.VcateShow = false
+                }
+            })
         }
         onBeforeMount(()=>{
             getVcate().then((res)=>{
                 status.vacatedata = res.result;
             })
+
         })
         onMounted(()=>{
             initVlitForm();
@@ -270,7 +281,9 @@ export default {
                                 content:"新增成功",
                                 type:'success'
                             })
-                            getVcate();
+                            getVcate().then((res)=>{
+                                status.vacatedata = res.result;
+                            });
                         })
                         const formModel = forms.querySelector('.modalmiss');
                         formModel.click();

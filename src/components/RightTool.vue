@@ -1,11 +1,11 @@
 <template>
 <nav class="righttoolnav">
     <ul class="list-wrap" title="">
-        <li title="留言建议" @click="giveSuggest">
-            <i class="icon ri-chat-smile-2-line" style="color:rgb(123, 237, 159)"></i>
+        <li title="简历制作系统" @click="giveSuggest">
+            <i class="icon ri-u-disk-fill" style="color:rgb(123, 237, 159)"></i>
         </li>
-        <li title="点赞本站" @click="clickLike">
-            <i class="icon ri-heart-2-line" style="color:#ff6b81"></i>
+        <li title="项目设计系统" @click="clickLike">
+            <i class="icon  ri-file-copy-2-fill" style="color:#ff6b81"></i>
         </li>
         <li title="回到顶部" @click="goTop">
             <i class="icon ri-sort-asc" style="color:rgb(112, 161, 255)"></i>
@@ -86,6 +86,9 @@ export default {
         justify-content: center;
         align-items: center;
         transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        &:hover{
+            background-color: fade(#000000,20%);
+        }
     }
 }
 </style>

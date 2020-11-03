@@ -26,6 +26,20 @@ const getVcate = () => {
     return getCgi('vcate/get', {})
 }
 
+const getSys = () => {
+    return getCgi('setsys/getmsg', {})
+}
+const editeSys = (params) => {
+    return postCgi('setsys/edite', params)
+}
+
+const getFriendLink = () => {
+    return getCgi('friendlink/get', {})
+}
+const addFriendLink = (params) => {
+    return postCgi('friendlink/add', params)
+}
+
 export {
     getAdminList,
     getAdminMsg,
@@ -34,5 +48,9 @@ export {
     addVcate,
     deleVcate,
     editeVcate,
-    getVcate
+    getVcate,
+    getSys,
+    editeSys,
+    getFriendLink,
+    addFriendLink
 }
