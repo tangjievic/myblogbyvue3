@@ -212,6 +212,9 @@ export default {
                                 type:'success',
                                 content:res.message
                             })
+                            getFriendLink().then((res)=>{
+                                status.tabledata = res.result
+                            })
                         })
                     }
                     clearTimeout(waitValTime)

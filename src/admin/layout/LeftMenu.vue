@@ -1,4 +1,7 @@
 <style lang="less">
+.vertical-menu{
+    z-index: 998;
+}
 #sidebar-menu {
     .selected {
         background-color: fade(#20242f, 60%);

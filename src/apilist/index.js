@@ -40,6 +40,26 @@ const addFriendLink = (params) => {
     return postCgi('friendlink/add', params)
 }
 
+const addCate = (pramas) => {
+    return postCgi('cate/add', pramas)
+}
+const editeCate = (params) => {
+    return postCgi('cate/edite', params)
+}
+const getCate = () => {
+    return getCgi('cate/get', {})
+}
+
+const addTag = (pramas) => {
+    return postCgi('tag/add', pramas)
+}
+const editeTag = (params) => {
+    return postCgi('tag/edite', params)
+}
+const getTag = () => {
+    return getCgi('tag/get', {})
+}
+
 export {
     getAdminList,
     getAdminMsg,
@@ -52,5 +72,11 @@ export {
     getSys,
     editeSys,
     getFriendLink,
-    addFriendLink
+    addFriendLink,
+    addCate,
+    editeCate,
+    getCate,
+    addTag,
+    editeTag,
+    getTag
 }
