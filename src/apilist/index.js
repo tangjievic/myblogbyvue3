@@ -60,6 +60,22 @@ const getTag = () => {
     return getCgi('tag/get', {})
 }
 
+const getUserLisr = (params) => {
+    return getCgi('user/list', params)
+}
+
+const getArtList = (params) => {
+    return getCgi('art/list', params)
+}
+
+const addArt = (params) => {
+    return postCgi('art/add', params)
+}
+
+const editeArt = (params) => {
+    return postCgi('art/edite', params)
+}
+
 export {
     getAdminList,
     getAdminMsg,
@@ -78,5 +94,9 @@ export {
     getCate,
     addTag,
     editeTag,
-    getTag
+    getTag,
+    getUserLisr,
+    getArtList,
+    addArt,
+    editeArt
 }

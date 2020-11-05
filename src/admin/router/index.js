@@ -31,32 +31,32 @@ const routers = [{
             {
                 path: 'artlist',
                 name: 'artlist',
-                component:ArtList
+                component: ArtList
             },
             {
-                path:'artedite',
-                name:'artedite',
-                component:ArtEdite
+                path: 'artedite',
+                name: 'artedite',
+                component: ArtEdite
             },
             {
-                path:"artcate",
-                name:'artcate',
-                component:ArtCate
+                path: "artcate",
+                name: 'artcate',
+                component: ArtCate
             },
             {
-                path:'userlist',
-                name:'userliset',
-                component:UserList
+                path: 'userlist',
+                name: 'userliset',
+                component: UserList
             },
             {
-                path:"system",
-                name:'system',
-                component:SysSeting
+                path: "system",
+                name: 'system',
+                component: SysSeting
             },
             {
-                path:'videopage',
-                name:'videopage',
-                component:VideoPage
+                path: 'videopage',
+                name: 'videopage',
+                component: VideoPage
             },
             {
                 path: '/',
@@ -71,9 +71,10 @@ const routers = [{
             import ('../views/login/LoginPage.vue')
     },
     {
-        path:'/404',
-        name:'404',
-        component:() => import('../views/404.vue')
+        path: '/404',
+        name: '404',
+        component: () =>
+            import ('../views/404.vue')
     }
 ]
 

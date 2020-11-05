@@ -45,8 +45,9 @@
                             <label class="col-md-2 col-form-label">文章栏目</label>
                             <div class="col-md-10">
                                 <select class="form-control" required v-model="submitArt.cate_id">
-                                    <option :value="0">Large select</option>
-                                    <option :value="1">Small select</option>
+                                    <template v-for="(item,index) in catedata" :key="index">
+                                        <option v-if="Number(item.id)!==0" :value="item.id">{{item.catename}}</option>
+                                    </template>
                                 </select>
                             </div>
                         </div>
@@ -56,8 +57,7 @@
                             <label class="col-md-2 col-form-label">文章标签</label>
                             <div class="col-md-10">
                                 <select class="form-control" required v-model="submitArt.tag_id">
-                                    <option :value="0">Large select</option>
-                                    <option :value="1">Small select</option>
+                                    <option :value="item.id" v-for="(item,index) in tagdata" :key="index">{{item.tagname}}</option>
                                 </select>
                             </div>
                         </div>
@@ -65,8 +65,10 @@
                             <label class="col-md-2 col-form-label">文章类型</label>
                             <div class="col-md-10">
                                 <select class="form-control" required v-model="submitArt.type">
-                                    <option :value="0">Large select</option>
-                                    <option :value="1">Small select</option>
+                                    <option :value="0">原创</option>
+                                    <option :value="1">转载</option>
+                                    <option :value="2">教程</option>
+                                    <option :value="3">杂谈</option>
                                 </select>
                             </div>
                         </div>
@@ -93,7 +95,7 @@
                 <div class="form-group">
                     <label>文章简介</label>
                     <div>
-                        <textarea required class="form-control" rows="2"></textarea>
+                        <textarea required class="form-control" rows="2" v-model="submitArt.desc"></textarea>
                         <div class="invalid-feedback">
                             文章简介不能为空
                         </div>
@@ -106,7 +108,7 @@
                 <div class="form-group row">
                     <label for="example-url-input" class="col-md-4 col-form-label">文章相关内容地址链接:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="url" placeholder="请输入地址">
+                        <input class="form-control" type="url" placeholder="请输入地址" v-model="submitArt.linkurl">
                         <div class="invalid-feedback">
                             链接地址错误
                         </div>
@@ -130,11 +132,14 @@
 
 <script>
 import {
+    onBeforeMount,
     onMounted,
     reactive,
-    ref
+    ref,
+    toRefs
 } from 'vue';
 import ContainerFluid from "../../../layout/ContainerFluid";
+import $alert from '../../../../wetui/base/alert/alert';
 import {
     initVlitForm
 } from '../../../common/common';
@@ -143,15 +148,24 @@ import 'tui-editor/dist/tui-editor-contents.css';
 import 'codemirror/lib/codemirror.css';
 import 'highlight.js/styles/github.css';
 import Editor from 'tui-editor';
+import {getCate,getTag,editeArt } from '../../../../apilist/index';
+import { useRouter } from 'vue-router'
 export default {
     components: {
         ContainerFluid,
     },
     setup() {
+        const router = useRouter();
         const validationfrom = ref(null);
+        const status = reactive({
+            tagdata:[],
+            catedata:[]
+        })
         const submitArt = reactive({
+            id:null,
             title: '',
             stitle: '',
+            desc:'',
             author: 'TANGJIE',
             cate_id: 0,
             tag_id: 0,
@@ -172,6 +186,17 @@ export default {
                         submitArt.content = markText.getMarkdown()
                         submitArt.marktext = markText.getHtml()
                         console.log(submitArt)
+                        editeArt(submitArt).then((res)=>{
+                            $alert({
+                                type:'success',
+                                content:res.message+',正在跳转'
+                            })
+                            setTimeout(()=>{
+                                router.push({
+                                    name:'artlist'
+                                })
+                            },1000)
+                        })
                     }
                     clearTimeout(waitValTime)
                 }, 500)
@@ -180,6 +205,13 @@ export default {
                 markText.setMarkdown('');
             })
         }
+        onBeforeMount(()=>{
+            Promise.all([getCate(),getTag()]).then(res=>{
+                console.log(res)
+                status.catedata = res[0].result
+                status.tagdata = res[1].result
+            })
+        })
         onMounted(() => {
             initVlitForm();
             const instanceEditor = new Editor({
@@ -191,10 +223,17 @@ export default {
                 useCommandShortcut: true
             });
             submitArtData(instanceEditor);
+            const editeart = JSON.parse( sessionStorage.getItem('editeartdata'));
+            //console.log(editeart)
+            Object.keys(submitArt).forEach((item)=>{
+                submitArt[item] = editeart[item]
+            })
+            instanceEditor.setMarkdown(submitArt.marktext);
         })
         return {
             submitArt,
-            validationfrom
+            validationfrom,
+            ...toRefs(status)
         }
     }
 }

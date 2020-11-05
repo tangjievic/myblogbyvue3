@@ -6,9 +6,12 @@
 <ContainerFluid title="文章列表" moudleText="文章管理菜单" routerText="文章列表">
     <div class="card">
         <div class="card-body">
-            <TablePanel :columns="columns" :data="tabledata">
+            <TablePanel 
+            @edit="editeArtData"
+            :columns="columns" 
+            :data="tabledata">
             </TablePanel>
-            <Pagination :total="50" :current="2"></Pagination>
+            <Pagination :total="total" :current="page" :pageSize="10" @change="changePage"></Pagination>
         </div>
     </div>
 </ContainerFluid>
@@ -23,6 +26,8 @@ import {
 import TablePanel from '../../../components/TablePanel';
 import ContainerFluid from '../../../layout/ContainerFluid';
 import Pagination from 'ant-design-vue/lib/pagination';
+import { getArtList } from '../../../../apilist/index';
+import { useRouter } from 'vue-router';
 export default {
     components: {
         TablePanel,
@@ -30,6 +35,7 @@ export default {
         Pagination
     },
     setup() {
+        const router = useRouter();
         const status = reactive({
             columns: [{
                     title: "ID",
@@ -74,7 +80,7 @@ export default {
                 },
                 {
                     title: "创作日期",
-                    dataIndex: "cretatime",
+                    dataIndex: "createtime",
                 },
                 {
                     title: '是否登录查看',
@@ -85,15 +91,44 @@ export default {
                     dataIndex: "isvip",
                 },
             ],
-            tabledata: []
+            tabledata: [],
+            total:0,
+            page:0
         })
-
+        //分页改变，请求数据
+        const changePage = (page) =>{
+            getArtList({
+                type:0,
+                page:page
+            }).then(res=>{
+                status.tabledata = res.result.data;
+                status.total = res.result.total;
+                status.page = res.result.current_page
+            })
+        }
+        //编辑文章
+        const editeArtData = (event) =>{
+            sessionStorage.setItem('editeartdata',JSON.stringify(event))
+            router.push({
+                name:'artedite',
+            })
+        }
         //数据初始化
         onBeforeMount(() => {
             console.log('数据初始化')
+            getArtList({
+                page:1,
+                type:0
+            }).then(res=>{
+                status.tabledata = res.result.data;
+                status.total = res.result.total;
+                status.page = res.result.current_page
+            })
         })
         return {
-            ...toRefs(status)
+            ...toRefs(status),
+            changePage,
+            editeArtData
         }
     }
 }

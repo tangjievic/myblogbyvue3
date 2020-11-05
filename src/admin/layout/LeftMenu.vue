@@ -78,7 +78,7 @@
                             <a href="javascript:;" @click="goPage('artwritte')" class="waves-effect">文章写作</a>
                         </li>
                         <li :class="[current==='artedite'?'selected':'']">
-                            <a href="javascript:;" @click="goPage('artedite')" class="waves-effect">文章修改</a>
+                            <a href="javascript:;" class="waves-effect">文章修改</a>
                         </li>
                     </ul>
                 </li>

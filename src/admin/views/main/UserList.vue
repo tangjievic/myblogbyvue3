@@ -11,7 +11,7 @@
                     <a href="#!">{{item.createtime}}</a>
                 </template>
             </TablePanel>
-            <Pagination :total="50" :current="2"></Pagination>
+            <Pagination :total="pagetotal" :current="currentpage" size="10"></Pagination>
         </div>
     </div>
 </ContainerFluid>
@@ -20,11 +20,13 @@
 <script>
 import {
     reactive,
-    toRefs
+    toRefs,
+    onBeforeMount
 } from 'vue'
 import TablePanel from '../../components/TablePanel';
 import ContainerFluid from '../../layout/ContainerFluid';
 import Pagination from 'ant-design-vue/lib/pagination';
+import { getUserLisr } from '../../../apilist/index';
 export default {
     components: {
         TablePanel,
@@ -69,9 +71,20 @@ export default {
                 dataIndex: 'signature',
                 key: 'signature'
             }],
-            tabledata: []
+            tabledata: [],
+            pagetotal:0,
+            currentpage:0,
         })
-
+        onBeforeMount(()=>{
+            getUserLisr({
+                page:1
+            }).then(res=>{
+                console.log(res)
+                status.tabledata = res.result.data;
+                status.pagetotal = res.result.total;
+                status.currentpage = res.result.current_page;
+            })
+        })
         return {
             ...toRefs(status)
         }
