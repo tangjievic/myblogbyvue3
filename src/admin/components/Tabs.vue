@@ -6,8 +6,8 @@
 <div class="card">
     <div class="card-body">
         <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
-            <li class="nav-item" v-for="(item,index) in tabsPage" :key="item.key?item.key:index">
-                <a :class="['nav-link',index === 0?'active':'']" data-toggle="tab" :href="'#'+(item.key?item.key:index)" role="tab">
+            <li class="nav-item" v-for="(item,index) in tabsPage" :key="item.key?item.key:index" @click="chageHandle(item.key?item.key:index)">
+                <a :href="'#'+(item.key?item.key:index)" :class="['nav-link',index === 0?'active':'']"  data-toggle="tab" role="tab">
                     <span class="d-block d-sm-none"></span>
                     <span class="d-none d-sm-block">{{item.name}}</span>
                 </a>
@@ -39,6 +39,13 @@ import {
  */
 export default {
     components: {},
+
+    methods:{
+        chageHandle(index){
+            //console.log(index)
+            this.$emit('change',index)
+        }
+    },
     setup() {
         const tabsPage = inject('tabsPage');
         const state = reactive({

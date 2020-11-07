@@ -26,24 +26,42 @@
 
                         <div class="row text-center">
                             <div class="col-4">
-                                <h7 class="text-muted mb-2">绑定邮箱</h7>
+                                <h6 class="text-muted mb-2">绑定邮箱</h6>
                                 <p>981955667@qq.com</p>
                             </div>
                             <div class="col-4">
-                                <h7 class="text-muted mb-2">当前职业</h7>
+                                <h6 class="text-muted mb-2">当前职业</h6>
                                 <p>前端</p>
                             </div>
                             <div class="col-4">
-                                <h7 class="text-muted mb-2">个性签名</h7>
+                                <h6 class="text-muted mb-2">个性签名</h6>
                                 <p>进则九州，退则四海</p>
                             </div>
                         </div>
                     </div>
                 </section>
                 <section class="page_section box-boder">
-                    <Tabs>
+                    <Tabs @change="tabChanges">
                         <template v-slot:allart>
-                            <div>全部文章</div>
+                            <AllArt></AllArt>
+                        </template>
+                        <template v-slot:hotart>
+                            <HotArt></HotArt>
+                        </template>
+                        <template v-slot:mylike>
+                            <div>全部s文章</div>
+                        </template>
+                        <template v-slot:mycollect>
+                            <div>全部s文章</div>
+                        </template>
+                        <template v-slot:vip>
+                            <div>全部s文章</div>
+                        </template>
+                        <template v-slot:video>
+                            <div>全部s文章</div>
+                        </template>
+                        <template v-slot:artquery>
+                            <div>全部s文章</div>
                         </template>
                     </Tabs>
                 </section>
@@ -104,6 +122,8 @@ import Footer from '../components/Footer';
 import Tabs from '../../admin/components/Tabs';
 import DyBtn from '../components/DyBtn.vue';
 import ViewBubble from '../../components/ViewBubble.vue';
+import AllArt from '../components/AllArt.vue';
+import HotArt from '../components/HotArt.vue';
 export default {
     components: {
         Header,
@@ -111,7 +131,9 @@ export default {
         Footer,
         Tabs,
         DyBtn,
-        ViewBubble
+        ViewBubble,
+        AllArt,
+        HotArt
     },
     setup() {
         provide('tabsPage', [{
@@ -143,11 +165,24 @@ export default {
                 key: 'artquery'
             }
         ])
+        const tabChanges = (event)=>{
+            console.log(event)
+        }
+        return{
+            tabChanges,
+        }
     }
 }
 </script>
 
 <style lang="less">
+#layout-wrapper{
+    &::after{
+        content: '';
+        display: block;
+        height: 90px;
+    }
+}
 .main-content {
     margin-left: 70px;
 }
