@@ -23,7 +23,7 @@
                       </div>
 
                       <div class="p-2 mt-5">
-                        <form class="form-horizontal" action="index.html">
+                        <form class="form-horizontal">
                           <div class="form-group auth-form-group-custom mb-4">
                             <i
                               class="ri-user-2-line auti-custom-input-icon"
@@ -32,7 +32,7 @@
                             <input
                               type="text"
                               class="form-control"
-                              id="username"
+                              v-model="loginData.username"
                               placeholder="输入管理员名"
                             />
                           </div>
@@ -45,7 +45,7 @@
                             <input
                               type="password"
                               class="form-control"
-                              id="userpassword"
+                              v-model="loginData.password"
                               placeholder="输入密码"
                             />
                           </div>
@@ -57,14 +57,15 @@
                             <input
                               type="password"
                               class="form-control"
-                              id="userpassword"
                               placeholder="输入密码"
+                              v-model="loginData.repassword"
                             />
                           </div>
                           <div class="mt-4 text-center">
                             <button
                               class="btn btn-primary w-md waves-effect waves-light"
                               type="submit"
+                              @click="submitLoginData"
                             >
                               点击登录
                             </button>
@@ -157,11 +158,56 @@
 
 <script>
 /* eslint-disable */
-import { onMounted } from "vue";
+import { onMounted, reactive } from "vue";
 import '../../assets/js/timeline';
+import $alert from '../../../wetui/base/alert/alert';
+import { adminLogin } from '../../apilist/index';
+import { useRoute,useRouter } from 'vue-router';
+import Cookies from 'js-cookie';
 export default {
   setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const loginData = reactive({
+      username:'',
+      password:'',
+      repassword:""
+    })
+    const submitLoginData = ()=>{
+      if(loginData.password!==loginData.repassword){
+        $alert({
+          content:'两次密码不一致',
+          type:"error"
+        })
+      }else{
+        adminLogin({
+          username:loginData.username,
+          password:loginData.password
+        }).then((res)=>{
+          $alert({
+            content:res.message,
+            type:'success'
+          })
+          Cookies.set('usertoken', res.result.token, { expires: 3 });
+          Cookies.set('adminname',res.result.username,{ expires: 3 });
+
+          setTimeout(()=>{
+            if(route.query.redirect){
+              router.push({
+                name:route.query.redirect
+              })
+            }else{
+              router.push({
+                name:'welcome'
+              })
+            }
+          },2000)
+
+        })
+      }
+    }
     onMounted(() => {
+      //console.log(route.query.redirect,'redirect')
       paths(4);
       circles(4);
       function paths(nb) {
@@ -337,6 +383,11 @@ export default {
         );
       }
     });
+  
+    return{
+      loginData,
+      submitLoginData
+    }
   },
 };
 </script>

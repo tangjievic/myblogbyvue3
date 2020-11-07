@@ -26,7 +26,7 @@ import {
 import TablePanel from '../../../components/TablePanel';
 import ContainerFluid from '../../../layout/ContainerFluid';
 import Pagination from 'ant-design-vue/lib/pagination';
-import { getArtList } from '../../../../apilist/index';
+import { getArtList } from '../../../apilist';
 import { useRouter } from 'vue-router';
 export default {
     components: {

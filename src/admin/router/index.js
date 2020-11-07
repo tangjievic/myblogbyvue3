@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory, } from 'vue-router';
 import Main from '../views/main/Main.vue';
 import WelCome from '../views/WelCome.vue';
 import AdminList from '../views/main/AdminList.vue';

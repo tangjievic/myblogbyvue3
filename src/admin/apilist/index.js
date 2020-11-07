@@ -12,6 +12,9 @@ const addAdmin = (pramas) => {
 const deleAdmin = (params) => {
     return postCgi('admin/delete', params)
 }
+const adminLogin = (params) => {
+    return postCgi('admin/login', params)
+}
 
 const addVcate = (params) => {
     return postCgi('vcate/add', params)
@@ -98,5 +101,6 @@ export {
     getUserLisr,
     getArtList,
     addArt,
-    editeArt
+    editeArt,
+    adminLogin
 }

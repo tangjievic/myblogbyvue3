@@ -101,7 +101,7 @@ import { reactive,toRefs,ref,onMounted } from 'vue';
 import TablePanel from '../../components/TablePanel';
 import ContainerFluid from '../../layout/ContainerFluid';
 import $alert from '../../../wetui/base/alert/alert';
-import { getAdminList,deleAdmin,addAdmin } from '../../../apilist';
+import { getAdminList,deleAdmin,addAdmin } from '../../apilist';
 import { initVlitForm } from '../../common/common';
 export default {
     components: {

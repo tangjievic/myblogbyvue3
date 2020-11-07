@@ -148,7 +148,7 @@ import 'tui-editor/dist/tui-editor-contents.css';
 import 'codemirror/lib/codemirror.css';
 import 'highlight.js/styles/github.css';
 import Editor from 'tui-editor';
-import { addArt,getCate,getTag } from '../../../../apilist/index';
+import { addArt,getCate,getTag } from '../../../apilist';
 import { useRouter } from 'vue-router'
 export default {
     components: {

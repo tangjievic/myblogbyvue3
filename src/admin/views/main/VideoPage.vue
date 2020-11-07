@@ -149,7 +149,7 @@ import Tabs from '../../components/Tabs';
 import TablePanel from '../../components/TablePanel';
 import $alert from '../../../wetui/base/alert/alert';
 import { initVlitForm } from '../../common/common';
-import { addVcate as addVcateDate,getVcate,deleVcate,editeVcate } from '../../../apilist/index';
+import { addVcate as addVcateDate,getVcate,deleVcate,editeVcate } from '../../apilist/index';
 import WetModel from '../../../wetui/base/modal/Modal.vue';
 export default {
     components: {

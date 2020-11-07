@@ -145,7 +145,7 @@ import ContainerFluid from '../../../layout/ContainerFluid';
 import Tabs from '../../../components/Tabs';
 import TablePanel from '../../../components/TablePanel';
 import { initVlitForm } from '../../../common/common';
-import { getCate,editeCate, addCate,getTag,editeTag,addTag } from '../../../../apilist/index';
+import { getCate,editeCate, addCate,getTag,editeTag,addTag } from '../../../apilist';
 import $alert from '../../../../wetui/base/alert/alert';
 export default {
     components: {

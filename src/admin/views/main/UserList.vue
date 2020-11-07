@@ -26,7 +26,7 @@ import {
 import TablePanel from '../../components/TablePanel';
 import ContainerFluid from '../../layout/ContainerFluid';
 import Pagination from 'ant-design-vue/lib/pagination';
-import { getUserLisr } from '../../../apilist/index';
+import { getUserLisr } from '../../apilist/index';
 export default {
     components: {
         TablePanel,

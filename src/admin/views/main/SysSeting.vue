@@ -122,7 +122,7 @@ import ContainerFluid from '../../layout/ContainerFluid';
 import Tabs from '../../components/Tabs';
 import TablePanel from '../../components/TablePanel';
 import { initVlitForm } from '../../common/common';
-import { getSys,editeSys,addFriendLink, getFriendLink } from '../../../apilist/index';
+import { getSys,editeSys,addFriendLink, getFriendLink } from '../../apilist';
 import $alert from '../../../wetui/base/alert/alert';
 export default {
     components: {
