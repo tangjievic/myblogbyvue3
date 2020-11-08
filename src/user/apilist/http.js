@@ -22,10 +22,13 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 //请求拦截，这里的tooken 我是采用的cookie
 axios.interceptors.request.use(function(config) {
     // 在发送请求之前做些什么
-    const token = Cookies.get('token');
-    const username = Cookies.get('username');
-    token && (config.headers.token = token);
-    username && (config.headers.username = username);
+    let token = Cookies.get('token');
+    let username = Cookies.get('username');
+    config.headers.token = token ? token : ''
+    config.headers.username = username ? username : ''
+        //console.log(token, username)
+        // token && (config.headers.token = token);
+        // username && (config.headers.username = username);
     return config;
 }, function(error) {
     // 对请求错误做些什么
@@ -117,4 +120,8 @@ export function postCgi(url, params) {
             reject(err.data)
         })
     })
+}
+
+export {
+    SEVERURL
 }

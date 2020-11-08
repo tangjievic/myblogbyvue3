@@ -11,7 +11,7 @@ export const alertObj = {
         $alert: (props) => {
             alertObj._num++;
             othervm(Alert, props);
-            console.log(alertObj, 'xxxx')
+            //console.log(alertObj, 'xxxx')
         }
 
     }

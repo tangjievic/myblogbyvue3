@@ -1,7 +1,7 @@
 <template>
 <div id="layout-wrapper">
-    <Header headertitle='TANGJIE-BLOG'></Header>
-    <Lefttool></Lefttool>
+    <Header headertitle='TANGJIE-BLOG' :usermsg="usermsg"></Header>
+    <Lefttool :islogin="true" :catelist="catelist"></Lefttool>
     <div class="main-content">
         <div class="page-content">
             <div class="right">
@@ -14,10 +14,12 @@
                         <div class="text-center">
                             <div class="media-body">
                                 <h5>
-                                    <i class="mdi mdi-account mr-1"></i> 昵称
+                                    <i class="mdi mdi-account mr-1"></i> {{usermsg.nickname?usermsg.nickname:usermsg.username}}
                                 </h5>
                                 <div>
-                                    <span class="wet-tag wet-tag__lg wet-tag__risk">VIP</span>
+                                    <span class="wet-tag wet-tag__lg wet-tag__risk" v-if="usermsg.level===1">VIP</span>
+                                    <span class="wet-tag wet-tag__lg wet-tag__risk" v-else-if="usermsg.level===2">VIP</span>
+                                    <span class="wet-tag wet-tag__lg wet-tag__info" v-else-if="usermsg.level===0">非VIP</span>
                                 </div>
                             </div>
                         </div>
@@ -27,15 +29,15 @@
                         <div class="row text-center">
                             <div class="col-4">
                                 <h6 class="text-muted mb-2">绑定邮箱</h6>
-                                <p>981955667@qq.com</p>
+                                <p>{{usermsg.email}}</p>
                             </div>
                             <div class="col-4">
                                 <h6 class="text-muted mb-2">当前职业</h6>
-                                <p>前端</p>
+                                <p>{{usermsg.profession?usermsg.profession:'待填写'}}</p>
                             </div>
                             <div class="col-4">
                                 <h6 class="text-muted mb-2">个性签名</h6>
-                                <p>进则九州，退则四海</p>
+                                <p>{{usermsg.signature?usermsg.signature:'待填写'}}</p>
                             </div>
                         </div>
                     </div>
@@ -72,7 +74,7 @@
                     <div class="text-center">
                         <div class="media-body">
                             <div class="dybtn_wrapper">
-                                <DyBtn></DyBtn>
+                                <DyBtn @click="getScore"></DyBtn>
                             </div>
                             <p class="text-muted" style="padding-top:60px">
                                 <i class="mdi mdi-calendar-check mr-1"></i>签到奖积分，解锁"新姿势"
@@ -84,12 +86,12 @@
 
                     <div class="row text-center">
                         <div class="col-6">
-                            <p class="text-muted mb-2">今日运气值</p>
-                            <h5>72</h5>
+                            <p class="text-muted mb-2">我的积分</p>
+                            <h5>{{usermsg.score}}</h5>
                         </div>
                         <div class="col-6">
-                            <p class="text-muted mb-2">今日赚取积分</p>
-                            <h5>50分</h5>
+                            <p class="text-muted mb-2">我的运气值</p>
+                            <h5>{{luckvalue}}</h5>
                         </div>
                     </div>
                 </section>
@@ -114,7 +116,10 @@
 
 <script>
 import {
+  onBeforeMount,
     provide,
+    reactive,
+    toRefs,
 } from 'vue';
 import Header from '../components/Header';
 import Lefttool from '../../components/LeftTool';
@@ -124,6 +129,10 @@ import DyBtn from '../components/DyBtn.vue';
 import ViewBubble from '../../components/ViewBubble.vue';
 import AllArt from '../components/AllArt.vue';
 import HotArt from '../components/HotArt.vue';
+import $alert from '../../wetui/base/alert/alert';
+import Model from '../../wetui/base/modal/modal';
+import Cookies from 'js-cookie';
+import { getCate,getUserMsg, signinScroe} from '../apilist'
 export default {
     components: {
         Header,
@@ -165,11 +174,64 @@ export default {
                 key: 'artquery'
             }
         ])
+        const status = reactive({
+            catelist:[],
+            usermsg:{},
+            luckvalue:0,
+        })
         const tabChanges = (event)=>{
             console.log(event)
         }
+        const LuckValue = ()=>{
+            let luckvalue =  Cookies.get('luckvalue')
+            if(!luckvalue){
+                luckvalue = Math.round(Math.random()*100);
+                Cookies.set('luckvalue',luckvalue,{
+                    expires:1
+                })
+            }
+            status.luckvalue = luckvalue
+        }
+        const getScore = ()=>{
+            let timegap = (status.usermsg.scoretime?status.usermsg.scoretime:0) + 86400 -  Date.parse(new Date())/1000;
+            if(timegap >0){
+                $alert({
+                    type:'warn',
+                    content:"已签到，请勿多次点击"
+                })
+            }else{
+                let getscore = Math.round(50*status.luckvalue/100)
+                signinScroe({
+                    id:status.usermsg.id,
+                    score:getscore
+                }).then((res)=>{
+                    Model({
+                        type:'success',
+                        content:'今日获取积分值:'+getscore
+                    })
+                    status.usermsg.scoretime = res.result.scoretime
+                    status.usermsg.score = res.result.score
+                })
+            }
+        }
+        onBeforeMount(()=>{
+            LuckValue();
+            getUserMsg().then(res=>{
+                status.usermsg = res.result
+            })
+            getCate().then((res)=>{
+                //status.catelist = res.result
+                status.catelist = res.result.filter((value)=>{
+                    if(value.pid !==0){
+                        return value
+                    }
+                })
+            });
+        })
         return{
             tabChanges,
+            getScore,
+            ...toRefs(status)
         }
     }
 }

@@ -41,7 +41,7 @@
                         <input type="text" class="form-control" placeholder="输入邮箱验证码" v-model="submitdata.code" />
                     </div>
                     <div class="col-md-5">
-                        <SendCode @sendcode="sendCode"></SendCode>
+                        <SendCode @sendcode="sendCodeEvent(submitdata.email)"></SendCode>
                     </div>
                 </div>
                 <div class="mt-4 text-center">
@@ -68,8 +68,9 @@
 <script>
 import { reactive } from 'vue';
 import SendCode from '../../../components/SendCode';
-import { userCreate,getCode } from '../../apilist';
+import { userCreate } from '../../apilist';
 import $alert from '../../../wetui/base/alert/alert';
+import sendCodeEvent from './sendcode';
 export default {
     components:{
         SendCode
@@ -107,27 +108,10 @@ export default {
                 })
             })
         }
-        const sendCode = ()=>{
-            if(!submitdata.email){
-                $alert({
-                    content:"邮箱为空发送失败,请稍后",
-                    type:'risk'
-                })
-                return
-            }
-            getCode({
-                email : submitdata.email
-            }).then((res)=>{
-                $alert({
-                    content:res.message,
-                    type:'success'
-                })
-            })
-        }
         return{
             submitdata,
             createUser,
-            sendCode
+            sendCodeEvent
         }
     }
 }

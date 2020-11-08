@@ -1,4 +1,8 @@
-<style lang="less" scoped>
+<style lang="less">
+.ant-drawer-close{
+    top:-5px!important;
+}
+
 #page-topbar {
     z-index: 500;
 }
@@ -6,7 +10,6 @@
 .navbar-header {
     max-width: 1130px;
     padding: 0 0 0 100px;
-
     .header-title {
         font-size: 22px;
         color: var(--wet-primary);
@@ -58,7 +61,7 @@
                                 <h6 class="m-0"> 通知 </h6>
                             </div>
                             <div class="col-auto">
-                                <a href="#!" class="small"> 消息通知</a>
+                                消息通知
                             </div>
                         </div>
                     </div>
@@ -81,7 +84,7 @@
                         </a>
                     </div>
                     <div class="p-2 border-top">
-                        <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                        <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)" @click="lookMore">
                             <i class="mdi mdi-arrow-right-circle mr-1"></i> 查看更多
                         </a>
                     </div>
@@ -90,39 +93,59 @@
 
             <div class="dropdown d-inline-block user-dropdown">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-none d-xl-inline-block ml-1">Kevin</span>
+                    <span class="d-none d-xl-inline-block ml-1">{{usermsg.nickname?usermsg.nickname:usermsg.username}}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i class="ri-user-line align-middle mr-1"></i> 申请vip</a>
-                    <a class="dropdown-item" href="#"><i class="ri-user-line align-middle mr-1"></i> 我的积分</a>
-                    <a class="dropdown-item d-block" href="#"><i class="ri-settings-2-line align-middle mr-1"></i> 设置</a>
+                    <a class="dropdown-item" href="javascript:;" @click="applyVip"><i class="ri-user-line align-middle mr-1"></i> 申请vip</a>
+                    <a class="dropdown-item d-block" href="javascript:;" @click="showDrawer"><i class="ri-settings-2-line align-middle mr-1"></i> 设置</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i> 退出登录</a>
+                    <a class="dropdown-item text-danger" href="javascript:;" @click="logOutEvent"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i> 退出登录</a>
                 </div>
             </div>
-
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="ri-settings-2-line"></i>
-                </button>
-            </div>
-
         </div>
     </div>
+    <Drawer 
+    placement="right"
+    :closable="true"
+    width="400"
+    v-model:visible="visible"
+    title="个人信息设置">
+
+    </Drawer>
 </header>
 </template>
 
 <script>
+import { logOutEvent } from '../../common';
+import $alert from '../../wetui/base/alert/alert';
+import { SEVERURL } from '../apilist';
+import Drawer from 'ant-design-vue/lib/drawer';
+import 'ant-design-vue/lib/drawer/style/index.css';
 //console.log(this),在vue3中是没有this这个东西的
 import {
-    onMounted,
+    onMounted, reactive, toRefs,
 } from 'vue';
 // const goHome = () => {
 //     console.log(this, '直接定义方法,然后通过setup return出去')
 // }
 export default {
+    components:{
+        Drawer
+    },
+    props:{
+        usermsg:{
+            type:Object,
+            default(){
+                return{
+                    username:'未传入',
+                    nickname:'',
+                    email:''
+                }
+            }
+        }
+    },
     data() {
         return {
             nav_one: "个人中心"
@@ -138,10 +161,31 @@ export default {
         console.dir(this)
     },
     setup() {
+        const status = reactive({
+            visible:false
+        })
+        const applyVip = ()=>{
+            $alert({
+                type:'warn',
+                content:'暂无开通，敬请期待'
+            })
+        }
+        const lookMore = ()=>{
+            window.open(`${SEVERURL}/timeline`)
+        }
+        const showDrawer = ()=>{
+            status.visible = true
+        }
         onMounted(() => {
             //console.log(this)
         })
-        return {}
+        return {
+            logOutEvent,
+            applyVip,
+            lookMore,
+            showDrawer,
+            ...toRefs(status)
+        }
     }
 }
 </script>

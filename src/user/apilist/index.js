@@ -1,5 +1,4 @@
-import { postCgi } from '../../admin/apilist/http';
-import { getCgi } from './http';
+import { getCgi, postCgi } from './http';
 
 const getVcate = () => {
     return getCgi('vcate/get', {})
@@ -29,6 +28,12 @@ const userCreate = (params) => {
 const userFindPassword = (params) => {
     return postCgi('user/forget', params)
 }
+const getUserMsg = () => {
+    return getCgi('user/getmsg', {})
+}
+const signinScroe = (parmas) => {
+    return postCgi('user/signinscroe', parmas)
+}
 
 export {
     getVcate,
@@ -39,5 +44,7 @@ export {
     userLogin,
     userCreate,
     userFindPassword,
-    getCode
+    getCode,
+    getUserMsg,
+    signinScroe
 }

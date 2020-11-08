@@ -108,7 +108,7 @@ export default {
         alertNum(val,oldval){
             if(val !== oldval){
                 this.positionTop = this.$el.clientHeight*(val-1)+10*val;
-                console.log(this.positionTop)
+                //console.log(this.positionTop)
             }
         }
     },
@@ -122,7 +122,7 @@ export default {
         })
     },
     mounted(){
-        console.log(this.$el.clientHeight);
+        //console.log(this.$el.clientHeight);
         this.alertNum = alertObj._num;
         this.positionTop = this.$el.clientHeight*(this.alertNum-1)+10*this.alertNum;
         this.show = true;

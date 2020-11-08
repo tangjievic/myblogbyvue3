@@ -24,7 +24,11 @@
         position: relative;
         height: 100%;
     }
-
+    .hd_icon{
+        position: relative;
+        top: 2px;
+        color: #ffffff;
+    }
     .menu_top,
     .menu_bottom {
         position: absolute;
@@ -35,6 +39,9 @@
         padding: 0;
 
         .leftmenu-item {
+            &.selected{
+                background-color: multiply(@wet-primary, fade(@wet-inverse, 20%));
+            }
             position: relative;
             background-color: @wet-primary;
             transition: background-color 0.3s ease-in-out;
@@ -144,6 +151,7 @@
     .ft {
         padding: 10px;
         text-align: center;
+        border-top:1px solid #249f97;
     }
 
     .tj-blog_tool {
@@ -301,26 +309,26 @@
 <div class="wet-leftmenu fiexd">
     <div class="leftmenu_box"></div>
     <ul class="menu_top">
-        <li class="leftmenu-item">
-            <a href="Javascript:;" class="item-link tjblog-user_detail">
+        <li :class="['leftmenu-item',islogin?'selected':'']">
+            <a href="Javascript:;" class="item-link tjblog-user_detail" v-if="islogin">
                 <i class="ri-user-line"></i>
                 <span>用户</span>
             </a>
         </li>
         <li class="leftmenu-item">
-            <a href="Javascript:;" class="item-link">
+            <a href="Javascript:;" class="item-link" v-if="isvip">
                 <i class=" ri-vip-crown-line"></i>
                 <span>vip</span>
             </a>
         </li>
         <li class="leftmenu-item">
-            <a href="Javascript:;" class="item-link tjblog-user_login">
+            <a href="Javascript:;" class="item-link tjblog-user_login" v-if="!islogin">
                 <i class="ri-login-circle-line"></i>
                 <span>登入</span>
             </a>
         </li>
         <li class="leftmenu-item">
-            <a href="Javascript:;" class="item-link tjblog-user_logout">
+            <a href="Javascript:;" class="item-link tjblog-user_logout" v-if="islogin" @click="logOutEvent('username','token')">
                 <i class="ri-logout-circle-r-line"></i>
                 <span>登出</span>
             </a>
@@ -334,29 +342,17 @@
             </a>
             <div class="tj-blog_class">
                 <div class="hd">
-                    <span>博客文章分类</span><i class="ri-ubuntu-line"></i>
+                    <span>博客文章分类</span><i class="ri-ubuntu-line hd_icon"></i>
                 </div>
                 <ul class="tj_class">
-                    <li class="class_item selected">
-                        <a href="#" class="item-link">分类一</a>
-                    </li>
-                    <li class="class_item">
-                        <a href="#" class="item-link">分类一</a>
-                    </li>
-                    <li class="class_item">
-                        <a href="#" class="item-link">分类一</a>
-                    </li>
-                    <li class="class_item">
-                        <a href="#" class="item-link">分类一</a>
-                    </li>
-                    <li class="class_item">
-                        <a href="#" class="item-link">分类一</a>
+                    <li :class="['class_item',item.id===selectid?'selected':'']" v-for="(item,index) in catelist" :key="index">
+                        <a :href="`${linkurl}?cid=${item.id}`" class="item-link">{{item.catename}}</a>
                     </li>
                 </ul>
-                <div class="update_box">
+                <!-- <div class="update_box">
                     <div class="updata">最新更新</div>
-                    <a href="#" class="updta-link">分类一</a>
-                </div>
+                    <a :href="`${linkurl}?cid=${newCateItem().id}`" class="updta-link">{{newCateItem().catename}}</a>
+                </div> -->
                 <div class="ft">
                     前端视界,你我同行
                 </div>
@@ -413,7 +409,52 @@
 </template>
 
 <script>
+import { logOutEvent } from '../common';
 export default {
-
+    props:{
+        islogin:{
+            type:Boolean,
+            default:false
+        },
+        isvip:{
+            type:Boolean,
+            default:false
+        },
+        // newcatid:{
+        //     type:Number,
+        //     default:0
+        // },
+        selectid:{
+            type:Number,
+            default:0
+        },
+        linkurl:String,
+        catelist:{
+            type:Array,
+            default(){
+                return [
+                    {
+                        id:0,
+                        catename:"未定义",
+                    }
+                ]
+            }
+        }
+    },
+    methods:{
+        // newCateItem(){
+        //     for(let i = 0;i<this.catelist;i++){
+        //         if(this.catelist[i].id === this.newcatid){
+        //             return this.catelist[i]
+        //         }
+        //     }
+        // }
+    },
+    setup(){
+        
+        return{
+            logOutEvent
+        }
+    }
 }
 </script>

@@ -120,9 +120,9 @@
                         <a :href="`https://www.tangjietop.cn/artical.html?aid=${item.id}`" class="artlist-link">{{item.title}}·{{item.stitle}}</a>
                     </h3>
                     <div class="art_tag">
-                        <span class="wet-tag small wet-tag__success" v-if="Number(islogin) !==0">公众文章</span>
-                        <span class="wet-tag small wet-tag__info" v-if="Number(islogin) ===1">非公众文章</span>
-                        <span class="wet-tag small wet-tag__risk" v-if="Number(isvip) ===1">VIP专属</span>
+                        <span class="wet-tag small wet-tag__success" v-if="Number(item.islogin) !==0">公众文章</span>
+                        <span class="wet-tag small wet-tag__info" v-if="Number(item.islogin) ===1">非公众文章</span>
+                        <span class="wet-tag small wet-tag__risk" v-if="Number(item.isvip) ===1">VIP专属</span>
                     </div>
                 </div>
                 <p class="art_desc"> </p>
