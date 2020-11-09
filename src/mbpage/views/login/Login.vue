@@ -8,7 +8,7 @@
             <a href="javascript:;" @click="goBack" data-activates="slide-out-left" class="side-nav-left"><i class="fa fa-chevron-left"></i></a>
         </div>
         <div class="site-brand">
-            <a href="index.html">
+            <a href="javascript:;">
                 <h1 class="title">{{hdtitle}}</h1>
             </a>
         </div>

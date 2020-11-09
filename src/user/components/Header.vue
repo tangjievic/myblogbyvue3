@@ -120,7 +120,7 @@
 <script>
 import { logOutEvent } from '../../common';
 import $alert from '../../wetui/base/alert/alert';
-import { SEVERURL } from '../apilist';
+import { SEVERURL } from '../apilist/http';
 import Drawer from 'ant-design-vue/lib/drawer';
 import 'ant-design-vue/lib/drawer/style/index.css';
 //console.log(this),在vue3中是没有this这个东西的

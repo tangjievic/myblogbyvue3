@@ -72,7 +72,7 @@ export default {
 
     setup() {
         const status = reactive({
-            remarklist = []
+            remarklist : []
         })
         const submitData = reactive({
             uid: Number(uid),

@@ -113,7 +113,6 @@ export default {
         })
         watchEffect(() => {
             status.current = route.name
-
         })
         onMounted(() => {
             //初始化左侧导航

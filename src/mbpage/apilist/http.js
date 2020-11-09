@@ -1,9 +1,7 @@
 // 这里是axios封装文件
 import axios from 'axios';
-import $alert from '../../wetui/base/alert/alert';
+import message from 'ant-design-vue/lib/message';
 import Cookies from 'js-cookie';
-import Router from '../router';
-//console.log(Router, 'xxxx')
 let SEVERURL = '';
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
@@ -43,48 +41,14 @@ axios.interceptors.response.use(
     },
     function(error) {
         // 对响应错误做点什么
-        console.log(Router.currentRoute, 'axios')
-        if (!error.response) {
-            $alert({
-                type: 'risk',
-                content: '网络连接错误'
-            })
-        }
         if (error.response.status) {
             switch (error.response.status) {
                 case 401:
-                    $alert({
-                        type: 'risk',
-                        content: '用户未登陆'
-                    })
-                    setTimeout(() => {
-                        Router.replace({
-                            name: "login",
-                            query: {
-                                redirect: Router.currentRoute._rawValue.name
-                            }
-                        })
-                    }, 2500)
-                    break;
+                    return Promise.reject(error.response)
                 case 403:
-                    $alert({
-                        type: 'risk',
-                        content: '用户登录过期,请重新登录'
-                    })
-                    setTimeout(() => {
-                        Router.replace({
-                            name: "login",
-                            query: {
-                                redirect: Router.currentRoute._rawValue.name
-                            }
-                        })
-                    }, 2500)
-                    break;
+                    return Promise.reject(error.response)
                 default:
-                    $alert({
-                        content: error.response.data.message,
-                        type: "risk"
-                    })
+                    message.error(error.response.data.message)
                     break;
             }
         }

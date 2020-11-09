@@ -1,24 +1,26 @@
 import { reactive, toRefs } from "vue";
+import Cookies from 'js-cookie';
 import SendCode from '../../../components/SendCode';
-import $alert from '../../../wetui/base/alert/alert';
-import { useRouter } from 'vue-router';
-import { userLogin,getCode,userCreate,userFindPassword} from '../../apilist'
+import message from 'ant-design-vue/lib/message';
+import { useRouter, useRoute } from 'vue-router';
+import { userLogin, getCode, userCreate, userFindPassword } from '../../apilist'
 export default {
-    components:{
+    components: {
         SendCode
     },
     setup() {
+        const route = useRoute();
         const router = useRouter();
         const status = reactive({
-            hdtitle:'登录页·登录',
+            hdtitle: '登录页·登录',
             submitdatascence: 0, // 0登录，1注册，2忘记密码
-            repassword:''
+            repassword: ''
         })
         const registerdata = reactive({
-            username:'',
-            email:'',
-            password:'',
-            code:''
+            username: '',
+            email: '',
+            password: '',
+            code: ''
         })
         const logindata = reactive({
             email: '',
@@ -30,27 +32,18 @@ export default {
             password: '',
             code: ''
         })
-        const createUser = ()=>{
-            if(registerdata.password !== status.repassword){
-                $alert({
-                    content:"两次密码输入不一致，请检查",
-                    type:'risk'
-                })
+        const createUser = () => {
+            if (registerdata.password !== status.repassword) {
+                message.error("两次密码输入不一致，请检查")
                 return
             }
-            userCreate(registerdata).then(res=>{
-                $alert({
-                    content:res.message,
-                    type:'success'
-                })
+            userCreate(registerdata).then(res => {
+                message.success(res.message)
             })
         }
-        const usertoLogin = ()=>{
+        const usertoLogin = () => {
             userLogin(logindata).then((res) => {
-                $alert({
-                    content: res.message,
-                    type: 'success'
-                })
+                message.success(res.message)
                 Cookies.set('token', res.result.token, {
                     expires: 3
                 });
@@ -70,26 +63,20 @@ export default {
             })
         }
 
-        const findPasswrod = ()=>{
-            if(finddata.password !== status.password){
-                $alert({
-                    content:"两次密码输入不一致，请检查",
-                    type:'risk'
-                })
+        const findPasswrod = () => {
+            if (finddata.password !== status.password) {
+                message.error("两次密码输入不一致，请检查")
                 return
             }
-            userFindPassword(finddata).then((res)=>{
-                $alert({
-                    content:res.message,
-                    type:'success'
-                })
+            userFindPassword(finddata).then((res) => {
+                message.success(res.message)
             })
         }
 
         const statuChange = (typenum) => {
             status.submitdatascence = typenum;
             status.repassword = '';
-            switch(typenum){
+            switch (typenum) {
                 case 0:
                     status.hdtitle = '登录页·登录';
                     break;
@@ -104,12 +91,12 @@ export default {
                     break
             }
         }
-        const goBack = () =>{
+        const goBack = () => {
             router.go(-1)
         }
-        const sendEmailCode = ()=>{
+        const sendEmailCode = () => {
             let email = '';
-            switch(status.submitdatascence){
+            switch (status.submitdatascence) {
                 case 0:
                     email = logindata.email
                     break;
@@ -123,23 +110,17 @@ export default {
                     email = logindata.email
                     break
             }
-            if(!email){
-                $alert({
-                    content: "邮箱为空发送失败,请稍后",
-                    type: 'risk'
-                })
+            if (!email) {
+                message.error('邮箱为空发送失败,请稍后')
                 return
             }
             getCode({
                 email
-            }).then(res=>{
-                $alert({
-                    content: res.message,
-                    type: 'success'
-                })
+            }).then(res => {
+                message.success(res.message)
             })
         }
-        return{
+        return {
             ...toRefs(status),
             statuChange,
             createUser,

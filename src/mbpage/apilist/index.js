@@ -27,11 +27,11 @@ const getUserMsg = () => {
 }
 
 export {
-
     getCate,
     getArtList,
     userLogin,
     userCreate,
     userFindPassword,
-    getCode
+    getCode,
+    getUserMsg
 }

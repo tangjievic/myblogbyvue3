@@ -3,7 +3,12 @@
 </style>
 <template>
 <MainLayout>
-    <router-view></router-view>
+    <router-view v-slot="{Component}">
+        <keep-alive v-if="route.meta.keepAlive">
+            <component :is="Component"></component>
+        </keep-alive>
+        <component v-else :is="Component"></component>
+    </router-view>
     <Footer></Footer>
 </MainLayout>
 </template>

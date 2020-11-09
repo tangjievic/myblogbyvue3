@@ -6,7 +6,7 @@
     <div class="navbar-top">
         <div class="side-nav-panel-left"></div>
         <div class="site-brand">
-            <a href="index.html">
+            <a>
                 <h1 class="title">TANGJIE-BLOG</h1>
             </a>
         </div>
@@ -46,19 +46,19 @@
         <div class="container">
             <div class="row">
                 <div class="col s4">
-                    <div class="content">
+                    <div class="content" @click="openModel">
                         <i class="fa fa-th-large"></i>
                         <h5 class="cotent_label">分类</h5>
                     </div>
                 </div>
                 <div class="col s4">
-                    <div class="content">
+                    <div class="content" @click="goPage('video')">
                         <i class="fa fa-laptop"></i>
                         <h5 class="cotent_label">视频</h5>
                     </div>
                 </div>
                 <div class="col s4">
-                    <div class="content">
+                    <div class="content" @click="goPage('tool')">
                         <i class="fa fa-leaf"></i>
                         <h5 class="cotent_label">工具</h5>
                     </div>
@@ -78,32 +78,46 @@
     <div class="blog-list">
         <div class="list_hd slider-tag warn">文章列表</div>
         <ul class="list_ul">
-            <li class="blog-detailt border-1px" v-for="(item,index) in 10" :key="index">
-                <h5 class="art_title"><a href="">文章标题</a></h5>
+            <li class="blog-detailt border-1px" v-for="(item,index) in state.artlist" :key="index">
+                <h5 class="art_title"><a href="">{{item.title}}</a></h5>
                 <div class="art_tag">
                     <span>
-                        <i class="fa fa-calendar-minus-o"></i>2021/08/09
+                        <i class="fa fa-calendar-minus-o"></i>{{moment(item.createtime*1000).format('YYYY-MM-DD')}}
                     </span>
                     <span>
-                        <i class="fa fa-pencil-square-o"></i>TANGJIE
+                        <i class="fa fa-pencil-square-o"></i>{{item.author}}
                     </span>
                     <span>
-                        <i class="fa fa-fire"></i>33
+                        <i class="fa fa-fire"></i>{{item.seenum}}
                     </span>
                 </div>
                 <p>简介</p>
                 <div class="btn_box">
-                    <button class="button-default">阅读详情</button>
+                    <button class="button-default" @click="goArtDetail">阅读详情</button>
                 </div>
             </li>
         </ul>
         <div class="pagenation">
             <button class="pre">上一页</button>
-            <div class="txt">第0页</div>
+            <div class="txt">第{{state.page}}页</div>
             <button class="next">下一页</button>
         </div>
     </div>
     <div class="ios"></div>
+    <AntModal
+        title="文章分类选择"
+        :visible="state.visible"
+        @ok="handleOk"
+        @cancel="handleCancel"
+        cancelText="取消"
+        okText="确定"
+    >
+        <ul class="blog-artlist">
+            <li v-for="item in catelist" :key="item.id">
+                <ant-btn block>{{item.catename}}</ant-btn>
+            </li>
+        </ul>
+    </AntModal>
 </div>
 </template>
 

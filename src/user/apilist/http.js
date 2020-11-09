@@ -50,12 +50,6 @@ axios.interceptors.response.use(
     },
     function(error) {
         // 对响应错误做点什么
-        if (!error.response) {
-            $alert({
-                type: 'risk',
-                content: '网络连接错误'
-            })
-        }
         if (error.response.status) {
             switch (error.response.status) {
                 case 401:

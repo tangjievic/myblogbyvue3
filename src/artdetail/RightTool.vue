@@ -1,16 +1,16 @@
 <template>
 <nav class="righttoolnav">
-    <ul class="list-wrap" title="">
-        <li title="收藏" @click="giveSuggest" v-if="!havecol">
+    <ul class="list-wrap">
+        <li title="收藏" @click="collecAction" v-if="!status.havecol">
             <i class="icon  ri-star-line" style="color:rgb(123, 237, 159)"></i>
         </li>
-        <li title="收藏" @click="giveSuggest" v-else>
+        <li title="取消收藏" @click="collecAction" v-else>
             <i class="icon  ri-star-fill" style="color:rgb(123, 237, 159)"></i>
         </li>
-        <li title="点赞" @click="clickLike" v-if="!havezan">
+        <li title="点赞" @click="likeAction" v-if="!status.havezan">
             <i class="icon  ri-heart-2-line" style="color:#ff6b81"></i>
         </li>
-        <li title="点赞" v-else @click="clickLike">
+        <li title="取消点赞" v-else @click="likeAction">
             <i class="icon  ri-heart-2-fill" style="color:#ff6b81"></i>
         </li>
         <li title="回到顶部" @click="goTop">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import $ from 'jquery';
+import jQuery from 'jquery';
 import $alert from '../wetui/base/alert/alert';
 import {
     getArtLikeCollect,
@@ -29,10 +29,8 @@ import {
     userCollectArt
 } from '../apilist'
 import {
-    onBeforeMount,
     onMounted,
     reactive,
-    toRefs
 } from 'vue';
 
 export default {
@@ -40,22 +38,27 @@ export default {
         const status = reactive({
             havezan: false,
             havecol: false,
-            uid: -1,
+            uid: 1,
             aid: 0,
             islogin: false
         })
+
         const likeAction = () => {
-            if (islogin && status.uid !== -1) {
+            if (status.islogin && status.uid !== -1) {
                 userLikeArt({
                     uid: status.uid,
                     aid: status.aid,
                 }).then(res => {
+                    $alert({
+                        type: 'success',
+                        content: res.message
+                    })
                     getArtLikeCollect({
                         uid: status.uid,
                         aid: status.aid
                     }).then(res => {
                         status.havezan = res.result.havezan
-                        status.havecol = res.havecol
+                        status.havecol = res.result.havecol
                     })
                 })
             } else {
@@ -66,17 +69,21 @@ export default {
             }
         }
         const collecAction = () => {
-            if (islogin && status.uid !== -1) {
+            if (status.islogin && status.uid !== -1) {
                 userCollectArt({
                     uid: status.uid,
                     aid: status.aid,
                 }).then(res => {
+                    $alert({
+                        type: 'success',
+                        content: res.message
+                    })
                     getArtLikeCollect({
                         uid: status.uid,
                         aid: status.aid
                     }).then(res => {
                         status.havezan = res.result.havezan
-                        status.havecol = res.havecol
+                        status.havecol = res.result.havecol
                     })
                 })
             } else {
@@ -105,29 +112,33 @@ export default {
                 }
             });
         }
-        onBeforeMount(() => {
-            status.uid = $('#app').data('uid');
-            status.aid = $('#app').data('aid');
-            if (status.uid !== -1) {
-                status.islogin = false
-            } else {
-                status.islogin = true
-            }
-        })
         onMounted(() => {
-            getArtLikeCollect({
-                uid: status.uid,
-                aid: status.aid
-            }).then(res => {
-                status.havezan = res.result.havezan
-                status.havecol = res.havecol
-            })
+            status.uid = jQuery('#app').data('uid');
+            status.aid = jQuery('#app').data('aid');
+            if (status.uid !== -1) {
+                status.islogin = true
+            } else {
+                status.islogin = false
+            }
+            if(status.islogin&&!isNaN(status.uid)){
+                getArtLikeCollect({
+                    uid: status.uid,
+                    aid: status.aid
+                }).then(res => {
+                    status.havezan = res.result.havezan
+                    status.havecol = res.result.havecol
+                    //console.log(status)
+                })
+            }else{
+                status.uid = -1;
+                status.aid = -1;
+            }
         })
         return {
             goTop,
-            giveSuggest,
-            clickLike,
-            ...toRefs(status)
+            collecAction,
+            likeAction,
+            status
         }
     }
 }

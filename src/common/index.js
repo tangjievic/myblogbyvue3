@@ -2,6 +2,7 @@
 import Cookies from 'js-cookie';
 import Model from '../wetui/base/modal/modal';
 import $alert from '../wetui/base/alert/alert';
+import $ from 'jquery';
 let SEVERURL = '';
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
@@ -9,8 +10,7 @@ if (process.env.NODE_ENV == 'development') {
 } else {
     SEVERURL = 'https://tangjietop.cn'
 }
-const $ = window.$
-    //登录退出函数
+//登录退出函数
 const logOutEvent = (username, token) => {
     Model({
         type: 'info',

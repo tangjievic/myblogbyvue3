@@ -129,7 +129,7 @@
     <div class="navbar-top">
         <div class="side-nav-panel-left"></div>
         <div class="site-brand">
-            <a href="index.html">
+            <a>
                 <h1 class="title">SEARCH-BLOG</h1>
             </a>
         </div>

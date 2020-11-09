@@ -13,12 +13,18 @@ const routers = [{
         children: [{
                 name: 'home',
                 path: 'home',
-                component: Home
+                component: Home,
+                meta: {
+                    keepAlive: true
+                }
             },
             {
                 name: "search",
                 path: "search",
-                component: Fond
+                component: Fond,
+                meta: {
+                    keepAlive: true
+                }
             },
             {
                 name: "my",
@@ -32,14 +38,16 @@ const routers = [{
         ]
     },
     {
-        path:'/artlist',
-        name:'artlist',
-        component:()=>import('../views/art/ArtList.vue')
+        path: '/artlist',
+        name: 'artlist',
+        component: () =>
+            import ('../views/art/ArtList.vue')
     },
     {
-        path:'/artdetail',
-        name:'artdetail',
-        component:()=>import('../views/art/ArtDetail.vue')
+        path: '/artdetail',
+        name: 'artdetail',
+        component: () =>
+            import ('../views/art/ArtDetail.vue')
     },
     {
         name: 'setting',

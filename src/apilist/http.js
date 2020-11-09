@@ -45,12 +45,6 @@ axios.interceptors.response.use(
     },
     function(error) {
         // 对响应错误做点什么
-        if (!error.response) {
-            $alert({
-                type: 'risk',
-                content: '网络连接错误'
-            })
-        }
         if (error.response.status) {
             switch (error.response.status) {
                 case 401:
@@ -59,7 +53,7 @@ axios.interceptors.response.use(
                         content: '用户未登陆'
                     })
                     setTimeout(() => {
-                        window.open('https://www.tangjietop.cn/user#/login','_self')
+                        window.open('https://www.tangjietop.cn/user#/login', '_self')
                     }, 2500)
                     break;
                 case 403:
@@ -69,7 +63,7 @@ axios.interceptors.response.use(
                     })
                     setTimeout(() => {
                         setTimeout(() => {
-                            window.open('https://www.tangjietop.cn/user#/login','_self')
+                            window.open('https://www.tangjietop.cn/user#/login', '_self')
                         }, 2500)
                     }, 2500)
                     break;

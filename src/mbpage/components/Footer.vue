@@ -98,19 +98,22 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
+import { reactive,watchEffect } from 'vue';
+import { useRouter,useRoute } from 'vue-router';
 export default {
     setup(){
-        const router = useRouter()
-        let status = reactive({
+        const router = useRouter();
+        const route = useRoute();
+        const status = reactive({
             current:'home'
         })
-        let seletTbsItem = (key)=>{
+        watchEffect(()=>{
+            status.current = route.name
+        })
+        const seletTbsItem = (key)=>{
             status.current = key;
             router.push({name:key})
         }
-
         return{
             seletTbsItem,
             status

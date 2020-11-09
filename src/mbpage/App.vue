@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { getCate } from './apilist'
 function pageLoadInit() {
     const view = document.getElementById('loading_init');
     if (view) {
@@ -18,8 +20,18 @@ function pageLoadInit() {
 }
 export default {
     name: 'App',
+    methods:{
+        ...mapActions({
+            setCateList:'cate/setCateList'
+        })
+    },
+    created(){
+        getCate().then(res=>{
+            this.setCateList(res.result)
+        })
+    },
     setup() {
-        pageLoadInit()
+        pageLoadInit();
     }
 }
 </script>
@@ -27,6 +39,7 @@ export default {
 <style lang="less">
 @import url('assets/css/materialize.css');
 @import url('assets/font-awesome/css/font-awesome.min.css');
+@import url('../admin/style/index.less');
 @import url('assets/css/normalize.css');
 @import url('assets/css/owl.carousel.css');
 @import url('assets/css/owl.theme.css');
