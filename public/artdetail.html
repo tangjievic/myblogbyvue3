@@ -154,49 +154,13 @@
 </code></div></pre>
                 </article>
             </section>
-            <section class="box-boder page_section">
-                <h3 class="section_hd">评论发布</h3>
-                <div class="artcomment_box">
-                    <textarea id="artcomment_input"></textarea>
-                </div>
-                <div class="btn-right">
-                    <button type="submit" class="submit_btn"><span class="">提交评论</span> <i class="mdi mdi-send"></i></button>
-                </div>
-            </section>
-            <section class="box-boder page_section">
-                <h3 class="section_hd">历史评论</h3>
-                <ul class="art_recoment">
-                    <li class="recomen-item">
-                        <div class="conversation-list">
-                            <div class="ctext-wrap">
-                                <div class="conversation-name">
-                                    <span>昵称</span>
-                                    <div class="user_level">
-                                        <span class="wet-tag wet-tag__sm wet-tag__success">VIP用户</span>
-                                        <span class="wet-tag wet-tag__sm ">普通用户</span>
-                                    </div>
-                                </div>
-                                <div class="ctext-wrap-content">
-                                    <p>
-                                        我是发的离开as砥砺奋进塑料袋咖啡富士达
-                                    </p>
-                                </div>
-                                <p class="chat-time"><i class="mdi mdi-clock-outline"></i> 2012/01/08</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="no-recomen">
-                        <img alt="没有评论" src="<%= BASE_URL %>image/none.png">
-                        <div class="txt">暂无评论，赶紧来抢沙发吧</div>
-                    </li>
-                </ul>
-            </section>
+            <div id="tj-blog__remark" data-aid="1" data-user="uid"></div>
         </div>
     </div>
     <footer class="footer-wrrapper write_type">
         <%= require('html-loader!./element/footer.html') %>
     </footer>
-    <div id="app"></div>
+    <div id="app" data-selectcateid="" data-aid="1" data-uid="uid"></div>
 </body>
 
 </html>

@@ -1,0 +1,58 @@
+.view_page{
+    display: flex;
+    flex-direction: column;
+    .register{
+        position: relative;
+        .rotate_box {
+            position: absolute;
+            left: 0;
+            right: 0;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+            transform: rotateY(90deg);
+            &.show {
+                transform: rotateY(0deg);
+                opacity: 1;
+            }
+        }
+    }
+    .input-field{
+        margin-top: 0;
+    }
+    .section{
+        padding: 10px;
+        flex: 1;
+    }
+    .validate{
+        background-color: #ffffff;
+    }
+    .footer{
+        flex: 0 0 auto;
+        height: 120px;
+    }
+    .about-us-foot{
+        h6{
+            font-size: 14px;
+        }
+    }
+    .btn-box{
+        .button-default{
+            display: block;
+            width: 100%;
+        }
+    }
+    .mbsendcode{
+        height: 35px;
+        line-height: 35px;
+    }
+    .other_click{
+        padding: 10px 0.75rem;
+        display: flex;
+        justify-content: space-around;
+        a{
+            &:active{
+                background-color: fade(#000000,10%);
+            }
+        }
+    }
+}

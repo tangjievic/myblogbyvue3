@@ -1,9 +1,7 @@
 // 这里是axios封装文件
 import axios from 'axios';
-import $alert from '../../wetui/base/alert/alert';
+import $alert from '../wetui/base/alert/alert';
 import Cookies from 'js-cookie';
-import Router from '../router';
-//console.log(Router, 'xxxx')
 let SEVERURL = '';
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
@@ -26,9 +24,6 @@ axios.interceptors.request.use(function(config) {
     let username = Cookies.get('username');
     config.headers.token = token ? token : ''
     config.headers.username = username ? username : ''
-        //console.log(token, username)
-        // token && (config.headers.token = token);
-        // username && (config.headers.username = username);
     return config;
 }, function(error) {
     // 对请求错误做些什么
@@ -64,12 +59,7 @@ axios.interceptors.response.use(
                         content: '用户未登陆'
                     })
                     setTimeout(() => {
-                        Router.replace({
-                            name: "login",
-                            query: {
-                                redirect: Router.currentRoute._rawValue.name
-                            }
-                        })
+                        window.open('https://www.tangjietop.cn/user#/login','_self')
                     }, 2500)
                     break;
                 case 403:
@@ -78,12 +68,9 @@ axios.interceptors.response.use(
                         content: '用户登录过期,请重新登录'
                     })
                     setTimeout(() => {
-                        Router.replace({
-                            name: "login",
-                            query: {
-                                redirect: Router.currentRoute._rawValue.name
-                            }
-                        })
+                        setTimeout(() => {
+                            window.open('https://www.tangjietop.cn/user#/login','_self')
+                        }, 2500)
                     }, 2500)
                     break;
                 default:

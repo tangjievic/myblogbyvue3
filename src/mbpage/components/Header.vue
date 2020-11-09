@@ -8,7 +8,7 @@
 <template>
 <div class="navbar-top">
     <div class="side-nav-panel-left">
-        <a href="#" data-activates="slide-out-left" class="side-nav-left"><i class="fa fa-chevron-left"></i></a>
+        <a href="javascript:;" @click="goBack" data-activates="slide-out-left" class="side-nav-left"><i class="fa fa-chevron-left"></i></a>
     </div>
     <div class="site-brand">
         <a href="index.html">
@@ -20,7 +20,18 @@
 </template>
 
 <script>
+import {
+    useRouter
+} from 'vue-router';
 export default {
-
+    setup() {
+        const router = useRouter();
+        const goBack = () => {
+            router.go(-1)
+        }
+        return {
+            goBack
+        }
+    }
 }
 </script>

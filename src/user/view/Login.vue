@@ -44,7 +44,7 @@ import RegisterForm from './loginelement/registerForm';
 import FindForm from './loginelement/findForm';
 
 export default {
-    components:{
+    components: {
         LoginBg,
         LoginForm,
         FindForm,
@@ -54,17 +54,12 @@ export default {
         const status = reactive({
             submitdatascence: 0 // 0登录，1注册，2忘记密码
         })
-        const toLogin = () => {
-
-        }
         //改变数据提交场景
         const statuChange = (typenum) => {
-            console.log(typenum,'fadsfasdfas')
             status.submitdatascence = typenum
         }
         onMounted(() => {});
         return {
-            toLogin,
             statuChange,
             ...toRefs(status)
         }
@@ -76,12 +71,14 @@ export default {
 .form_rotate_box {
     position: relative;
     height: 680px;
+
     .rotate_box {
         position: absolute;
         left: 0;
         right: 0;
         transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
         opacity: 1;
+
         &.hide {
             transform: rotateY(90deg);
             opacity: 0;

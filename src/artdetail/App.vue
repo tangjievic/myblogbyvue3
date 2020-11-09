@@ -1,18 +1,56 @@
 <template>
 <div>
-    <LeftTool></LeftTool>
+    <LeftTool :islogin="islogin" :catelist="catelist" :selectid="selectid"></LeftTool>
     <ViewBubble></ViewBubble>
+    <RightTool></RightTool>
 </div>
 </template>
 
 <script>
 import LeftTool from '../components/LeftTool.vue';
 import ViewBubble from '../components/ViewBubble.vue';
+import RightTool from './RightTool.vue';
+import {
+    getCate
+} from '../user/apilist'
+import $ from 'jquery';
+import {
+    onMounted,
+    reactive,
+    toRefs
+} from 'vue';
+
 export default {
     name: 'App',
     components: {
         LeftTool,
-        ViewBubble
+        ViewBubble,
+        RightTool
+    },
+    setup() {
+        const status = reactive({
+            islogin: false,
+            catelist: [],
+            selectid: 0,
+        })
+        onMounted(() => {
+            status.selecti = Number($('#app').data('selectcateid'));
+            if (Number($('#app').data('islogin')) === 0) {
+                status.islogin = false
+            } else {
+                status.islogin = true
+            }
+            getCate().then(res => {
+                status.catelist = res.result.filter(value => {
+                    if (value.pid !== 0) {
+                        return value
+                    }
+                })
+            })
+        })
+        return {
+            ...toRefs(status)
+        }
     }
 }
 </script>

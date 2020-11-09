@@ -24,11 +24,13 @@
         position: relative;
         height: 100%;
     }
-    .hd_icon{
+
+    .hd_icon {
         position: relative;
         top: 2px;
         color: #ffffff;
     }
+
     .menu_top,
     .menu_bottom {
         position: absolute;
@@ -39,9 +41,10 @@
         padding: 0;
 
         .leftmenu-item {
-            &.selected{
+            &.selected {
                 background-color: multiply(@wet-primary, fade(@wet-inverse, 20%));
             }
+
             position: relative;
             background-color: @wet-primary;
             transition: background-color 0.3s ease-in-out;
@@ -151,7 +154,7 @@
     .ft {
         padding: 10px;
         text-align: center;
-        border-top:1px solid #249f97;
+        border-top: 1px solid #249f97;
     }
 
     .tj-blog_tool {
@@ -310,7 +313,7 @@
     <div class="leftmenu_box"></div>
     <ul class="menu_top">
         <li :class="['leftmenu-item',islogin?'selected':'']">
-            <a href="Javascript:;" class="item-link tjblog-user_detail" v-if="islogin">
+            <a href="Javascript:;" class="item-link tjblog-user_detail" v-if="isuerpage">
                 <i class="ri-user-line"></i>
                 <span>用户</span>
             </a>
@@ -322,7 +325,7 @@
             </a>
         </li>
         <li class="leftmenu-item">
-            <a href="Javascript:;" class="item-link tjblog-user_login" v-if="!islogin">
+            <a href="Javascript:;" class="item-link tjblog-user_login" v-if="!islogin" @click="goLogin">
                 <i class="ri-login-circle-line"></i>
                 <span>登入</span>
             </a>
@@ -409,39 +412,44 @@
 </template>
 
 <script>
-import { logOutEvent } from '../common';
+import {
+    logOutEvent
+} from '../common';
+import $alert from '../wetui/base/alert/alert'
 export default {
-    props:{
-        islogin:{
-            type:Boolean,
-            default:false
+    props: {
+        islogin: {
+            type: Boolean,
+            default: false
         },
-        isvip:{
-            type:Boolean,
-            default:false
+        isvip: {
+            type: Boolean,
+            default: false
+        },
+        isuerpage: {
+            type: Boolean,
+            default: false
         },
         // newcatid:{
         //     type:Number,
         //     default:0
         // },
-        selectid:{
-            type:Number,
-            default:0
+        selectid: {
+            type: Number,
+            default: 0
         },
-        linkurl:String,
-        catelist:{
-            type:Array,
-            default(){
-                return [
-                    {
-                        id:0,
-                        catename:"未定义",
-                    }
-                ]
+        linkurl: String,
+        catelist: {
+            type: Array,
+            default () {
+                return [{
+                    id: 0,
+                    catename: "未定义",
+                }]
             }
         }
     },
-    methods:{
+    methods: {
         // newCateItem(){
         //     for(let i = 0;i<this.catelist;i++){
         //         if(this.catelist[i].id === this.newcatid){
@@ -450,10 +458,21 @@ export default {
         //     }
         // }
     },
-    setup(){
-        
-        return{
-            logOutEvent
+    setup() {
+
+        const goLogin = () => {
+            $alert({
+                type: 'success',
+                content: '即将进入登录页'
+            })
+            setTimeout(() => {
+                window.open('https://www.tangjietop.cn/user#/login', '_self')
+            }, 1500)
+        }
+
+        return {
+            logOutEvent,
+            goLogin
         }
     }
 }

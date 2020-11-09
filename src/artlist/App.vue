@@ -2,12 +2,14 @@
 <div>
     <LeftTool></LeftTool>
     <ViewBubble></ViewBubble>
+    <RightTool></RightTool>
 </div>
 </template>
 
 <script>
 import LeftTool from '../components/LeftTool.vue';
 import ViewBubble from '../components/ViewBubble.vue';
+import RightTool from '../components/RightTool.vue';
 
 function pageLoadInit() {
     const view = document.getElementById('loading_init');
@@ -25,9 +27,10 @@ export default {
     name: 'App',
     components: {
         LeftTool,
-        ViewBubble
+        ViewBubble,
+        RightTool
     },
-    setup(){
+    setup() {
         pageLoadInit()
     }
 }

@@ -22,8 +22,8 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 //请求拦截，这里的tooken 我是采用的cookie
 axios.interceptors.request.use(function(config) {
     // 在发送请求之前做些什么
-    const token = Cookies.get('usertoken');
-    const username = Cookies.get('adminname');
+    const token = Cookies.get('token');
+    const username = Cookies.get('username');
     token && (config.headers.token = token);
     username && (config.headers.username = username);
     return config;

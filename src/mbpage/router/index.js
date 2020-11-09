@@ -32,6 +32,16 @@ const routers = [{
         ]
     },
     {
+        path:'/artlist',
+        name:'artlist',
+        component:()=>import('../views/art/ArtList.vue')
+    },
+    {
+        path:'/artdetail',
+        name:'artdetail',
+        component:()=>import('../views/art/ArtDetail.vue')
+    },
+    {
         name: 'setting',
         path: '/setting',
         component: Setting

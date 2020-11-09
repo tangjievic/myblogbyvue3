@@ -36,6 +36,12 @@ export default {
 @import url('assets/css/style.css');
 @import url('./views/my/mycenter.less');
 
+.list_ft {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
 .blog-list {
     margin: 15px 15px 0px 15px;
     position: relative;

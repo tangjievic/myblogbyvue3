@@ -34,7 +34,6 @@ const getUserMsg = () => {
 const signinScroe = (parmas) => {
     return postCgi('user/signinscroe', parmas)
 }
-
 export {
     getVcate,
     getFriendLink,

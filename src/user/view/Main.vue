@@ -1,7 +1,7 @@
 <template>
 <div id="layout-wrapper">
     <Header headertitle='TANGJIE-BLOG' :usermsg="usermsg"></Header>
-    <Lefttool :islogin="true" :catelist="catelist"></Lefttool>
+    <Lefttool :islogin="true" :catelist="catelist" :isuerpage="true"></Lefttool>
     <div class="main-content">
         <div class="page-content">
             <div class="right">
@@ -111,12 +111,13 @@
     </div>
     <Footer></Footer>
     <ViewBubble></ViewBubble>
+    <RightTool></RightTool>
 </div>
 </template>
 
 <script>
 import {
-  onBeforeMount,
+    onBeforeMount,
     provide,
     reactive,
     toRefs,
@@ -124,15 +125,21 @@ import {
 import Header from '../components/Header';
 import Lefttool from '../../components/LeftTool';
 import Footer from '../components/Footer';
+import RightTool from '../../components/RightTool.vue';
 import Tabs from '../../admin/components/Tabs';
 import DyBtn from '../components/DyBtn.vue';
 import ViewBubble from '../../components/ViewBubble.vue';
+
 import AllArt from '../components/AllArt.vue';
 import HotArt from '../components/HotArt.vue';
 import $alert from '../../wetui/base/alert/alert';
 import Model from '../../wetui/base/modal/modal';
 import Cookies from 'js-cookie';
-import { getCate,getUserMsg, signinScroe} from '../apilist'
+import {
+    getCate,
+    getUserMsg,
+    signinScroe
+} from '../apilist'
 export default {
     components: {
         Header,
@@ -141,8 +148,9 @@ export default {
         Tabs,
         DyBtn,
         ViewBubble,
+        RightTool,
         AllArt,
-        HotArt
+        HotArt,
     },
     setup() {
         provide('tabsPage', [{
@@ -175,60 +183,60 @@ export default {
             }
         ])
         const status = reactive({
-            catelist:[],
-            usermsg:{},
-            luckvalue:0,
+            catelist: [],
+            usermsg: {},
+            luckvalue: 0,
         })
-        const tabChanges = (event)=>{
+        const tabChanges = (event) => {
             console.log(event)
         }
-        const LuckValue = ()=>{
-            let luckvalue =  Cookies.get('luckvalue')
-            if(!luckvalue){
-                luckvalue = Math.round(Math.random()*100);
-                Cookies.set('luckvalue',luckvalue,{
-                    expires:1
+        const LuckValue = () => {
+            let luckvalue = Cookies.get('luckvalue')
+            if (!luckvalue) {
+                luckvalue = Math.round(Math.random() * 100);
+                Cookies.set('luckvalue', luckvalue, {
+                    expires: 1
                 })
             }
             status.luckvalue = luckvalue
         }
-        const getScore = ()=>{
-            let timegap = (status.usermsg.scoretime?status.usermsg.scoretime:0) + 86400 -  Date.parse(new Date())/1000;
-            if(timegap >0){
+        const getScore = () => {
+            let timegap = (status.usermsg.scoretime ? status.usermsg.scoretime : 0) + 86400 - Date.parse(new Date()) / 1000;
+            if (timegap > 0) {
                 $alert({
-                    type:'warn',
-                    content:"已签到，请勿多次点击"
+                    type: 'warn',
+                    content: "已签到，请勿多次点击"
                 })
-            }else{
-                let getscore = Math.round(50*status.luckvalue/100)
+            } else {
+                let getscore = Math.round(50 * status.luckvalue / 100)
                 signinScroe({
-                    id:status.usermsg.id,
-                    score:getscore
-                }).then((res)=>{
+                    id: status.usermsg.id,
+                    score: getscore
+                }).then((res) => {
                     Model({
-                        type:'success',
-                        content:'今日获取积分值:'+getscore
+                        type: 'success',
+                        content: '今日获取积分值:' + getscore
                     })
                     status.usermsg.scoretime = res.result.scoretime
                     status.usermsg.score = res.result.score
                 })
             }
         }
-        onBeforeMount(()=>{
+        onBeforeMount(() => {
             LuckValue();
-            getUserMsg().then(res=>{
+            getUserMsg().then(res => {
                 status.usermsg = res.result
             })
-            getCate().then((res)=>{
+            getCate().then((res) => {
                 //status.catelist = res.result
-                status.catelist = res.result.filter((value)=>{
-                    if(value.pid !==0){
+                status.catelist = res.result.filter((value) => {
+                    if (value.pid !== 0) {
                         return value
                     }
                 })
             });
         })
-        return{
+        return {
             tabChanges,
             getScore,
             ...toRefs(status)
@@ -238,13 +246,14 @@ export default {
 </script>
 
 <style lang="less">
-#layout-wrapper{
-    &::after{
+#layout-wrapper {
+    &::after {
         content: '';
         display: block;
         height: 90px;
     }
 }
+
 .main-content {
     margin-left: 70px;
 }

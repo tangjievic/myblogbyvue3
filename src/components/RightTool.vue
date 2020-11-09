@@ -86,8 +86,13 @@ export default {
         justify-content: center;
         align-items: center;
         transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        &:hover{
-            background-color: fade(#000000,20%);
+
+        &:hover {
+            background-color: fade(#000000, 20%);
+
+            .icon {
+                font-size: 30px;
+            }
         }
     }
 }
